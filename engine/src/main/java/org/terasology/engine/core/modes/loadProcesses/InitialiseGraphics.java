@@ -17,11 +17,11 @@ package org.terasology.engine.core.modes.loadProcesses;
 
 
 import org.joml.Vector4f;
-import org.terasology.assets.ResourceUrn;
+import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.engine.context.Context;
 import org.terasology.engine.core.TerasologyConstants;
 import org.terasology.engine.core.modes.SingleStepLoadProcess;
-import org.terasology.naming.Name;
+import org.terasology.gestalt.naming.Name;
 import org.terasology.engine.rendering.nui.NUIManager;
 import org.terasology.engine.rendering.nui.internal.NUIManagerInternal;
 import org.terasology.engine.rendering.primitives.Tessellator;

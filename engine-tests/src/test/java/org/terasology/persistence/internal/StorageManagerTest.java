@@ -15,10 +15,10 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.io.TempDir;
 import org.mockito.ArgumentMatchers;
 import org.terasology.engine.TerasologyTestingEnvironment;
-import org.terasology.assets.ResourceUrn;
-import org.terasology.assets.management.AssetManager;
+import org.terasology.gestalt.assets.ResourceUrn;
+import org.terasology.gestalt.assets.management.AssetManager;
 import org.terasology.engine.core.bootstrap.EntitySystemSetupUtil;
-import org.terasology.engine.core.module.ModuleManager;
+import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.core.paths.PathManager;
 import org.terasology.engine.entitySystem.entity.EntityRef;
 import org.terasology.engine.entitySystem.entity.internal.EngineEntityManager;
@@ -26,7 +26,7 @@ import org.terasology.engine.entitySystem.stubs.EntityRefComponent;
 import org.terasology.engine.entitySystem.stubs.StringComponent;
 import org.terasology.joml.geom.AABBfc;
 import org.terasology.engine.logic.location.LocationComponent;
-import org.terasology.module.ModuleEnvironment;
+import org.terasology.gestalt.module.ModuleEnvironment;
 import org.terasology.engine.network.Client;
 import org.terasology.engine.network.ClientComponent;
 import org.terasology.engine.network.NetworkMode;
@@ -110,7 +110,7 @@ public class StorageManagerTest extends TerasologyTestingEnvironment {
         blockManager = context.get(BlockManager.class);
         extraDataManager = context.get(ExtraBlockDataManager.class);
 
-        ModuleManager moduleManager = mock(ModuleManager.class);
+        ModuleManagerImpl moduleManager = mock(ModuleManagerImpl.class);
 
         when(moduleManager.getEnvironment()).thenReturn(moduleEnvironment);
 

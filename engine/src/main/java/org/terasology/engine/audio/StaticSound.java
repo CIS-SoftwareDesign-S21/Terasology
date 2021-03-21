@@ -16,8 +16,9 @@
 
 package org.terasology.engine.audio;
 
-import org.terasology.assets.AssetType;
-import org.terasology.assets.ResourceUrn;
+import org.terasology.gestalt.assets.AssetType;
+import org.terasology.gestalt.assets.DisposableResource;
+import org.terasology.gestalt.assets.ResourceUrn;
 
 /**
  * Interface for a non-streamed sound - these sounds are loaded entirely into memory.
@@ -30,8 +31,8 @@ public abstract class StaticSound extends Sound<StaticSoundData> {
      * @param urn       The urn identifying the asset.
      * @param assetType The asset type this asset belongs to.
      */
-    protected StaticSound(ResourceUrn urn, AssetType<?, StaticSoundData> assetType) {
-        super(urn, assetType);
+    protected StaticSound(ResourceUrn urn, AssetType<?, StaticSoundData> assetType, DisposableResource resource) {
+        super(urn, assetType,resource);
     }
 
     /**

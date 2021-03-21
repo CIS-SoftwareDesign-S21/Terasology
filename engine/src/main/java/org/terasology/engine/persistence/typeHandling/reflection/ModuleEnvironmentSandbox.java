@@ -4,9 +4,9 @@ package org.terasology.engine.persistence.typeHandling.reflection;
 
 import org.terasology.engine.core.SimpleUri;
 import org.terasology.engine.core.module.ModuleContext;
-import org.terasology.engine.core.module.ModuleManager;
-import org.terasology.module.ModuleEnvironment;
-import org.terasology.naming.Name;
+import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.gestalt.module.ModuleEnvironment;
+import org.terasology.gestalt.naming.Name;
 import org.terasology.persistence.typeHandling.TypeHandler;
 import org.terasology.persistence.typeHandling.reflection.SerializationSandbox;
 import org.terasology.reflection.TypeInfo;
@@ -18,9 +18,9 @@ import java.util.Optional;
 
 public class ModuleEnvironmentSandbox implements SerializationSandbox {
     private final TypeRegistry typeRegistry;
-    private final ModuleManager moduleManager;
+    private final ModuleManagerImpl moduleManager;
 
-    public ModuleEnvironmentSandbox(ModuleManager moduleManager, TypeRegistry typeRegistry) {
+    public ModuleEnvironmentSandbox(ModuleManagerImpl moduleManager, TypeRegistry typeRegistry) {
         this.moduleManager = moduleManager;
         this.typeRegistry = typeRegistry;
     }

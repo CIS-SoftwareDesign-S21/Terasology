@@ -4,11 +4,11 @@ package org.terasology.engine;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.io.TempDir;
-import org.terasology.engine.core.module.ModuleManager;
+import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.core.paths.PathManager;
-import org.terasology.module.DependencyResolver;
-import org.terasology.module.ModuleEnvironment;
-import org.terasology.module.ResolutionResult;
+import org.terasology.gestalt.module.dependencyresolution.DependencyResolver;
+import org.terasology.gestalt.module.ModuleEnvironment;
+import org.terasology.gestalt.module.dependencyresolution.ResolutionResult;
 import org.terasology.reflection.TypeRegistry;
 import org.terasology.engine.testUtil.ModuleManagerFactory;
 
@@ -17,7 +17,7 @@ import java.nio.file.Path;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 public abstract class ModuleEnvironmentTest {
-    protected ModuleManager moduleManager;
+    protected ModuleManagerImpl moduleManager;
     protected TypeRegistry typeRegistry;
 
     @BeforeEach

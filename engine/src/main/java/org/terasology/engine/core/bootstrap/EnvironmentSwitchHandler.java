@@ -4,11 +4,11 @@ package org.terasology.engine.core.bootstrap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.terasology.assets.ResourceUrn;
-import org.terasology.assets.module.ModuleAwareAssetTypeManager;
+import org.terasology.gestalt.assets.ResourceUrn;
+import org.terasology.gestalt.assets.module.ModuleAwareAssetTypeManager;
 import org.terasology.engine.config.flexible.AutoConfigManager;
 import org.terasology.engine.context.Context;
-import org.terasology.engine.core.module.ModuleManager;
+import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.entitySystem.Component;
 import org.terasology.engine.entitySystem.metadata.ComponentLibrary;
 import org.terasology.engine.entitySystem.metadata.EntitySystemLibrary;
@@ -26,8 +26,9 @@ import org.terasology.engine.physics.CollisionGroup;
 import org.terasology.engine.physics.CollisionGroupManager;
 import org.terasology.engine.registry.InjectionHelper;
 import org.terasology.engine.utilities.ReflectionUtil;
-import org.terasology.module.ModuleEnvironment;
-import org.terasology.naming.Name;
+import org.terasology.gestalt.module.ModuleEnvironment;
+import org.terasology.gestalt.naming.Name;
+import org.terasology.gestalt.util.reflection.GenericsUtil;
 import org.terasology.persistence.typeHandling.TypeHandler;
 import org.terasology.persistence.typeHandling.TypeHandlerFactory;
 import org.terasology.persistence.typeHandling.TypeHandlerLibrary;
@@ -37,7 +38,6 @@ import org.terasology.reflection.copy.CopyStrategy;
 import org.terasology.reflection.copy.CopyStrategyLibrary;
 import org.terasology.reflection.copy.RegisterCopyStrategy;
 import org.terasology.reflection.reflect.ReflectFactory;
-import org.terasology.util.reflection.GenericsUtil;
 
 import java.lang.reflect.Type;
 import java.util.Optional;
@@ -58,7 +58,7 @@ public final class EnvironmentSwitchHandler {
 
     @SuppressWarnings("unchecked")
     public void handleSwitchToGameEnvironment(Context context) {
-        ModuleManager moduleManager = context.get(ModuleManager.class);
+        ModuleManagerImpl moduleManager = context.get(ModuleManagerImpl.class);
         ModuleEnvironment environment = moduleManager.getEnvironment();
 
         TypeRegistry typeRegistry = context.get(TypeRegistry.class);
@@ -113,11 +113,18 @@ public final class EnvironmentSwitchHandler {
          */
         unregisterPrefabFormats(assetTypeManager);
         registeredPrefabFormat = new PrefabFormat(componentLibrary, typeHandlerLibrary);
-        assetTypeManager.registerCoreFormat(Prefab.class, registeredPrefabFormat);
+        assetTypeManager.getAssetFileDataProducer(assetTypeManager
+                .getAssetType(Prefab.class)
+                .orElseThrow(() -> new RuntimeException("Cannot get Prefab Asset typee")))
+                .addAssetFormat(registeredPrefabFormat);
         registeredPrefabDeltaFormat = new PrefabDeltaFormat(componentLibrary, typeHandlerLibrary);
-        assetTypeManager.registerCoreDeltaFormat(Prefab.class, registeredPrefabDeltaFormat);
+        assetTypeManager.getAssetFileDataProducer(assetTypeManager
+                .getAssetType(Prefab.class)
+                .orElseThrow(() -> new RuntimeException("Cannot get Prefab Asset type")))
+                .addDeltaFormat(registeredPrefabDeltaFormat);
 
         assetTypeManager.switchEnvironment(environment);
+        assetTypeManager.reloadAssets();
 
     }
 
@@ -154,23 +161,29 @@ public final class EnvironmentSwitchHandler {
 
     public void handleSwitchBackFromPreviewEnvironment(Context context) {
         // The newly created ComponentLibrary instance cannot be invalidated in context
-        ModuleEnvironment environment = context.get(ModuleManager.class).getEnvironment();
+        ModuleEnvironment environment = context.get(ModuleManagerImpl.class).getEnvironment();
         cheapAssetManagerUpdate(context, environment);
     }
 
 
     public void handleSwitchToEmptyEnvironment(Context context) {
-        ModuleEnvironment environment = context.get(ModuleManager.class).getEnvironment();
+        ModuleEnvironment environment = context.get(ModuleManagerImpl.class).getEnvironment();
         cheapAssetManagerUpdate(context, environment);
     }
 
     private void unregisterPrefabFormats(ModuleAwareAssetTypeManager assetTypeManager) {
         if (registeredPrefabFormat != null) {
-            assetTypeManager.removeCoreFormat(Prefab.class, registeredPrefabFormat);
+            assetTypeManager.getAssetFileDataProducer(assetTypeManager
+                    .getAssetType(Prefab.class)
+                    .orElseThrow(() -> new RuntimeException("Cannot get Prefab Asset type")))
+                    .removeAssetFormat(registeredPrefabFormat);
             registeredPrefabFormat = null;
         }
         if (registeredPrefabDeltaFormat != null) {
-            assetTypeManager.removeCoreDeltaFormat(Prefab.class, registeredPrefabDeltaFormat);
+            assetTypeManager.getAssetFileDataProducer(assetTypeManager
+                    .getAssetType(Prefab.class)
+                    .orElseThrow(() -> new RuntimeException("Cannot get Prefab Asset type")))
+                    .removeDeltaFormat(registeredPrefabDeltaFormat);
             registeredPrefabDeltaFormat = null;
         }
     }

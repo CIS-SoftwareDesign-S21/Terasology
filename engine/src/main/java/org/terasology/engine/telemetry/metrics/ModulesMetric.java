@@ -17,9 +17,9 @@ package org.terasology.engine.telemetry.metrics;
 
 import com.snowplowanalytics.snowplow.tracker.events.Unstructured;
 import org.terasology.engine.context.Context;
-import org.terasology.engine.core.module.ModuleManager;
-import org.terasology.module.Module;
-import org.terasology.module.ModuleEnvironment;
+import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.gestalt.module.Module;
+import org.terasology.gestalt.module.ModuleEnvironment;
 import org.terasology.engine.telemetry.TelemetryCategory;
 import org.terasology.engine.telemetry.TelemetryField;
 
@@ -68,7 +68,7 @@ public final class ModulesMetric extends Metric {
     }
 
     private void updateModules() {
-        ModuleManager moduleManager = context.get(ModuleManager.class);
+        ModuleManagerImpl moduleManager = context.get(ModuleManagerImpl.class);
         ModuleEnvironment moduleEnvironment = moduleManager.getEnvironment();
         modules.clear();
         Iterator<Module> iterator =  moduleEnvironment.iterator();

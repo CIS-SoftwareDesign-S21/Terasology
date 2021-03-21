@@ -9,13 +9,13 @@ import org.junit.jupiter.api.io.TempDir;
 import org.mockito.ArgumentCaptor;
 import org.terasology.engine.context.Context;
 import org.terasology.engine.core.SimpleUri;
-import org.terasology.engine.core.module.ModuleManager;
+import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.core.paths.PathManager;
 import org.terasology.engine.persistence.typeHandling.gson.GsonPersistedDataReader;
 import org.terasology.engine.persistence.typeHandling.gson.GsonPersistedDataSerializer;
 import org.terasology.engine.persistence.typeHandling.gson.GsonPersistedDataWriter;
-import org.terasology.module.ModuleEnvironment;
-import org.terasology.naming.Name;
+import org.terasology.gestalt.module.ModuleEnvironment;
+import org.terasology.gestalt.naming.Name;
 import org.terasology.persistence.serializers.Serializer;
 import org.terasology.persistence.typeHandling.TypeHandlerLibrary;
 
@@ -42,7 +42,7 @@ class AutoConfigManagerTest {
     ));
 
     private final Context context = mock(Context.class);
-    private final ModuleManager moduleManager = mock(ModuleManager.class);
+    private final ModuleManagerImpl moduleManager = mock(ModuleManagerImpl.class);
     private final ModuleEnvironment environment = mock(ModuleEnvironment.class);
 
     @BeforeEach
@@ -54,7 +54,7 @@ class AutoConfigManagerTest {
 
         when(moduleManager.getEnvironment()).thenReturn(environment);
 
-        when(context.get(eq(ModuleManager.class))).thenReturn(moduleManager);
+        when(context.get(eq(ModuleManagerImpl.class))).thenReturn(moduleManager);
     }
 
     @Test

@@ -3,7 +3,7 @@
 package org.terasology.engine.world.chunks;
 
 
-import org.terasology.module.sandbox.API;
+import org.terasology.gestalt.module.sandbox.API;
 
 /**
  * Chunks are a box-shaped logical grouping of Terasology's blocks, for performance reasons. 

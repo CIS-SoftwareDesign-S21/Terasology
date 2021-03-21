@@ -4,10 +4,10 @@ package org.terasology.engine.config.flexible.ui;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.terasology.assets.management.AssetManager;
+import org.terasology.gestalt.assets.management.AssetManager;
 import org.terasology.engine.config.flexible.AutoConfig;
 import org.terasology.engine.config.flexible.Setting;
-import org.terasology.engine.core.module.ModuleManager;
+import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.i18n.TranslationSystem;
 import org.terasology.nui.UIWidget;
 import org.terasology.nui.layouts.PropertyLayout;
@@ -54,7 +54,7 @@ public class AutoConfigWidgetFactory implements TypeWidgetFactory {
     @In
     private TranslationSystem translationSystem;
 
-    public AutoConfigWidgetFactory(ModuleManager moduleManager, AssetManager assetManager) {
+    public AutoConfigWidgetFactory(ModuleManagerImpl moduleManager, AssetManager assetManager) {
         this.settingWidgetFactory = new SettingWidgetFactory(moduleManager.getEnvironment(), assetManager);
         this.assetManager = assetManager;
     }

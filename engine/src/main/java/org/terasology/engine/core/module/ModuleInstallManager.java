@@ -15,10 +15,10 @@
  */
 package org.terasology.engine.core.module;
 
-import org.terasology.module.DependencyResolver;
-import org.terasology.module.Module;
-import org.terasology.module.ModuleRegistry;
-import org.terasology.naming.Name;
+import org.terasology.gestalt.module.Module;
+import org.terasology.gestalt.module.ModuleRegistry;
+import org.terasology.gestalt.module.dependencyresolution.DependencyResolver;
+import org.terasology.gestalt.naming.Name;
 import org.terasology.engine.utilities.download.MultiFileTransferProgressListener;
 
 import java.util.Collection;
@@ -28,12 +28,12 @@ import java.util.concurrent.Callable;
 
 public class ModuleInstallManager {
 
-    private ModuleManager moduleManager;
+    private ModuleManagerImpl moduleManager;
     private ModuleRegistry remoteRegistry;
     private ModuleListDownloader remoteRegistryUpdater;
     private ModuleDownloadListGenerator downloadListGenerator;
 
-    ModuleInstallManager(ModuleManager moduleManager, String remoteMasterServerAddress) {
+    ModuleInstallManager(ModuleManagerImpl moduleManager, String remoteMasterServerAddress) {
         this.moduleManager = moduleManager;
         this.remoteRegistryUpdater = new ModuleListDownloader(remoteMasterServerAddress);
     }

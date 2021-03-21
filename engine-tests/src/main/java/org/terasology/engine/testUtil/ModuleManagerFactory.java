@@ -3,9 +3,9 @@
 package org.terasology.engine.testUtil;
 
 import com.google.common.collect.Sets;
-import org.terasology.engine.core.module.ModuleManager;
+import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.entitySystem.stubs.StringComponent;
-import org.terasology.module.Module;
+import org.terasology.gestalt.module.Module;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -18,17 +18,17 @@ public final class ModuleManagerFactory {
 
     private ModuleManagerFactory() { }
 
-    public static ModuleManager create() throws Exception {
+    public static ModuleManagerImpl create() throws Exception {
         return create(false);
     }
 
-    public static ModuleManager create(boolean loadModulesFromClasspath) throws Exception {
-        ModuleManager moduleManager = new ModuleManager("", Collections.emptyList(), loadModulesFromClasspath);
+    public static ModuleManagerImpl create(boolean loadModulesFromClasspath) throws Exception {
+        ModuleManagerImpl moduleManager = new ModuleManagerImpl("", Collections.emptyList(), loadModulesFromClasspath);
         loadUnitTestModule(moduleManager);
         return moduleManager;
     }
 
-    public static void loadUnitTestModule(ModuleManager manager) throws IOException, URISyntaxException {
+    public static void loadUnitTestModule(ModuleManagerImpl manager) throws IOException, URISyntaxException {
         // using the StringComponent stub class as representative example of classes in the unittest module
         Module testModule = manager.loadClasspathModule(StringComponent.class);
         verify(testModule.getMetadata().getId().toString().equals("unittest"),

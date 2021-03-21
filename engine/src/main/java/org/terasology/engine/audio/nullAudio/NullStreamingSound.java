@@ -16,9 +16,9 @@
 
 package org.terasology.engine.audio.nullAudio;
 
-import org.terasology.assets.Asset;
-import org.terasology.assets.AssetType;
-import org.terasology.assets.ResourceUrn;
+import org.terasology.gestalt.assets.Asset;
+import org.terasology.gestalt.assets.AssetType;
+import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.engine.audio.StreamingSound;
 import org.terasology.engine.audio.StreamingSoundData;
 

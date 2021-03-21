@@ -15,8 +15,8 @@
  */
 package org.terasology.engine.core.module;
 
-import org.terasology.module.Module;
-import org.terasology.naming.Name;
+import org.terasology.gestalt.module.Module;
+import org.terasology.gestalt.naming.Name;
 import org.terasology.engine.registry.CoreRegistry;
 
 /**
@@ -37,7 +37,7 @@ public final class ModuleContext {
     }
 
     public static ContextSpan setContext(Name module) {
-        return new ContextSpan(CoreRegistry.get(ModuleManager.class).getEnvironment().get(module));
+        return new ContextSpan(CoreRegistry.get(ModuleManagerImpl.class).getEnvironment().get(module));
     }
 
     public static final class ContextSpan implements AutoCloseable {

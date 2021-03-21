@@ -11,8 +11,9 @@ import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL15;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.terasology.assets.AssetType;
-import org.terasology.assets.ResourceUrn;
+import org.terasology.gestalt.assets.AssetType;
+import org.terasology.gestalt.assets.DisposableResource;
+import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.engine.core.GameThread;
 import org.terasology.engine.core.subsystem.lwjgl.GLBufferPool;
 import org.terasology.engine.core.subsystem.lwjgl.LwjglGraphicsProcessing;
@@ -57,10 +58,9 @@ public class OpenGLSkeletalMesh extends SkeletalMesh {
     private DisposalAction disposalAction;
 
     public OpenGLSkeletalMesh(ResourceUrn urn, AssetType<?, SkeletalMeshData> assetType, GLBufferPool bufferPool,
-                              SkeletalMeshData data, LwjglGraphicsProcessing graphicsProcessing) {
-        super(urn, assetType);
-        disposalAction = new DisposalAction(urn, bufferPool);
-        getDisposalHook().setDisposeAction(disposalAction);
+                              SkeletalMeshData data, LwjglGraphicsProcessing graphicsProcessing, OpenGLSkeletalMesh.DisposalAction disposalAction) {
+        super(urn, assetType, disposalAction);
+        this.disposalAction = disposalAction;
         graphicsProcessing.asynchToDisplayThread(() -> {
             reload(data);
         });
@@ -183,7 +183,7 @@ public class OpenGLSkeletalMesh extends SkeletalMesh {
         return data.getStaticAABB();
     }
 
-    private static class DisposalAction implements Runnable {
+    public static class DisposalAction implements DisposableResource {
 
         private final ResourceUrn urn;
         private GLBufferPool bufferPool;
@@ -192,13 +192,13 @@ public class OpenGLSkeletalMesh extends SkeletalMesh {
         private int vboUVBuffer;
         private int vboIndexBuffer;
 
-         DisposalAction(ResourceUrn urn, GLBufferPool bufferPool) {
+        public DisposalAction(ResourceUrn urn, GLBufferPool bufferPool) {
             this.urn = urn;
             this.bufferPool = bufferPool;
         }
 
         @Override
-        public void run() {
+        public void close() {
             try {
                 GameThread.synch(() -> {
                     if (vboIndexBuffer != 0) {

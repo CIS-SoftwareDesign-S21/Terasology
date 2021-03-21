@@ -6,8 +6,8 @@ import com.google.common.collect.Lists;
 import org.joml.Vector2i;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.terasology.assets.AssetType;
-import org.terasology.assets.ResourceUrn;
+import org.terasology.gestalt.assets.AssetType;
+import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.engine.core.subsystem.lwjgl.LwjglGraphicsManager;
 import org.terasology.joml.geom.Rectanglef;
 import org.terasology.joml.geom.Rectanglei;
@@ -28,7 +28,6 @@ public class OpenGLTexture extends Texture {
     public OpenGLTexture(ResourceUrn urn, AssetType<?, TextureData> assetType, TextureData data, LwjglGraphicsManager graphicsManager) {
         super(urn, assetType);
         this.resources = new TextureResources(graphicsManager);
-        getDisposalHook().setDisposeAction(resources);
         reload(data);
     }
 

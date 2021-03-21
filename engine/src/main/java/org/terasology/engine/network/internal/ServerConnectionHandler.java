@@ -8,10 +8,12 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.terasology.engine.core.module.ModuleManager;
+import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.identity.PublicIdentityCertificate;
-import org.terasology.module.Module;
-import org.terasology.naming.Name;
+import org.terasology.gestalt.module.Module;
+import org.terasology.gestalt.module.resources.ArchiveFileSource;
+import org.terasology.gestalt.module.resources.FileReference;
+import org.terasology.gestalt.naming.Name;
 import org.terasology.nui.Color;
 import org.terasology.protobuf.NetData;
 import org.terasology.engine.registry.CoreRegistry;
@@ -37,7 +39,7 @@ public class ServerConnectionHandler extends ChannelInboundHandlerAdapter {
 
     private PublicIdentityCertificate identity;
 
-    private ModuleManager moduleManager = CoreRegistry.get(ModuleManager.class);
+    private ModuleManagerImpl moduleManager = CoreRegistry.get(ModuleManagerImpl.class);
 
     public ServerConnectionHandler(NetworkSystemImpl networkSystem) {
         this.networkSystem = networkSystem;
@@ -75,41 +77,26 @@ public class ServerConnectionHandler extends ChannelInboundHandlerAdapter {
             NetData.ModuleDataHeader.Builder result = NetData.ModuleDataHeader.newBuilder();
             result.setId(request.getModuleId());
             Module module = moduleManager.getEnvironment().get(new Name(request.getModuleId()));
-            if (module.isOnClasspath() || module.getLocations().size() != 1 || !Files.isReadable(module.getLocations().get(0))) {
+
+            if (!(module.getResources() instanceof ArchiveFileSource) ) { //TODO: gestaltv7 restore module downloading for maximum possibles
                 result.setError("Module not available for download");
             } else {
-                Path location = module.getLocations().get(0);
-                try {
+                FileReference fileReference = module.getResources().getFiles().iterator().next();
+                try (InputStream stream = fileReference.open()) {
+                    ByteString byteString = ByteString.readFrom(stream,1024);
+                    channelHandlerContext.channel().write(
+                            NetData.NetMessage.newBuilder().setModuleData(
+                                    NetData.ModuleData.newBuilder().setModule(byteString)
+                            ).build()
+                    );
                     result.setVersion(module.getVersion().toString());
-                    result.setSize(Files.size(location));
+                    result.setSize(byteString.size());
                     channelHandlerContext.channel().write(NetData.NetMessage.newBuilder().setModuleDataHeader(result).build());
-                } catch (IOException e) {
-                    logger.error("Error sending module data header", e);
-                    channelHandlerContext.channel().close();
-                    break;
-                }
-
-                try (InputStream stream = new BufferedInputStream(Files.newInputStream(location))) {
-
-                    long remainingData = Files.size(location);
-                    byte[] data = new byte[1024];
-                    while (remainingData > 0) {
-                        int nextBlock = (int) Math.min(remainingData, 1024);
-                        ByteStreams.read(stream, data, 0, nextBlock);
-                        channelHandlerContext.channel().write(
-                                NetData.NetMessage.newBuilder().setModuleData(
-                                        NetData.ModuleData.newBuilder().setModule(ByteString.copyFrom(data, 0,
-                                                nextBlock))
-                                ).build()
-                        );
-                        remainingData -= nextBlock;
-                    }
                 } catch (IOException e) {
                     logger.error("Error sending module", e);
                     channelHandlerContext.channel().close();
                     break;
                 }
-                channelHandlerContext.flush();
             }
         }
     }

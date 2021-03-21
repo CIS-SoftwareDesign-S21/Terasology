@@ -22,7 +22,7 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.terasology.engine.core.SimpleUri;
-import org.terasology.module.Module;
+import org.terasology.gestalt.module.Module;
 
 /**
  * A set of standard module extensions.

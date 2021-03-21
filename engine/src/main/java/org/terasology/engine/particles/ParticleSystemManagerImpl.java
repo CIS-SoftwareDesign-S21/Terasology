@@ -15,7 +15,7 @@
  */
 package org.terasology.engine.particles;
 
-import org.terasology.engine.core.module.ModuleManager;
+import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.entitySystem.Component;
 import org.terasology.engine.entitySystem.entity.EntityRef;
 import org.terasology.engine.entitySystem.entity.lifecycleEvents.BeforeDeactivateComponent;
@@ -26,7 +26,7 @@ import org.terasology.engine.entitySystem.systems.RegisterMode;
 import org.terasology.engine.entitySystem.systems.RegisterSystem;
 import org.terasology.engine.entitySystem.systems.UpdateSubscriberSystem;
 import org.terasology.engine.logic.location.LocationComponent;
-import org.terasology.module.sandbox.API;
+import org.terasology.gestalt.module.sandbox.API;
 import org.terasology.engine.particles.components.ParticleEmitterComponent;
 import org.terasology.engine.particles.events.ParticleSystemUpdateEvent;
 import org.terasology.engine.particles.rendering.ParticleRenderingData;
@@ -56,7 +56,7 @@ public class ParticleSystemManagerImpl extends BaseComponentSystem implements Up
     private Physics physics;
 
     @In
-    private ModuleManager moduleManager;
+    private ModuleManagerImpl moduleManager;
 
     private ParticleUpdater particleUpdater;
 

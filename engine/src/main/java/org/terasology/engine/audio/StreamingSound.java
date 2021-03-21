@@ -16,8 +16,9 @@
 
 package org.terasology.engine.audio;
 
-import org.terasology.assets.AssetType;
-import org.terasology.assets.ResourceUrn;
+import org.terasology.gestalt.assets.AssetType;
+import org.terasology.gestalt.assets.DisposableResource;
+import org.terasology.gestalt.assets.ResourceUrn;
 
 /**
  * Interface for a sound that is streamed from storage. The entire sound is not loaded into memory
@@ -30,8 +31,8 @@ public abstract class StreamingSound extends Sound<StreamingSoundData> {
      * @param urn       The urn identifying the asset.
      * @param assetType The asset type this asset belongs to.
      */
-    protected StreamingSound(ResourceUrn urn, AssetType<?, StreamingSoundData> assetType) {
-        super(urn, assetType);
+    protected StreamingSound(ResourceUrn urn, AssetType<?, StreamingSoundData> assetType, DisposableResource resource) {
+        super(urn, assetType, resource);
     }
 
     /**

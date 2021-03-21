@@ -3,11 +3,11 @@
 
 package org.terasology.engine.core.modes.loadProcesses;
 
-import org.terasology.assets.management.AssetManager;
+import org.terasology.gestalt.assets.management.AssetManager;
 import org.terasology.engine.config.Config;
 import org.terasology.engine.context.Context;
 import org.terasology.engine.core.modes.SingleStepLoadProcess;
-import org.terasology.engine.core.module.ModuleManager;
+import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.game.GameManifest;
 import org.terasology.engine.network.NetworkSystem;
 import org.terasology.engine.persistence.typeHandling.extensionTypes.BlockFamilyTypeHandler;
@@ -19,7 +19,7 @@ import org.terasology.engine.world.block.family.BlockFamilyLibrary;
 import org.terasology.engine.world.block.internal.BlockManagerImpl;
 import org.terasology.engine.world.block.tiles.WorldAtlas;
 import org.terasology.engine.world.block.tiles.WorldAtlasImpl;
-import org.terasology.module.ModuleEnvironment;
+import org.terasology.gestalt.module.ModuleEnvironment;
 import org.terasology.persistence.typeHandling.TypeHandlerLibrary;
 
 /**
@@ -44,7 +44,7 @@ public class RegisterBlocks extends SingleStepLoadProcess {
         WorldAtlas atlas = new WorldAtlasImpl(context.get(Config.class).getRendering().getMaxTextureAtlasResolution());
         context.put(WorldAtlas.class, atlas);
 
-        ModuleEnvironment environment = context.get(ModuleManager.class).getEnvironment();
+        ModuleEnvironment environment = context.get(ModuleManagerImpl.class).getEnvironment();
         context.put(BlockFamilyLibrary.class, new BlockFamilyLibrary(environment, context));
 
 

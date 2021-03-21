@@ -6,14 +6,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.terasology.engine.context.Context;
 import org.terasology.engine.core.SimpleUri;
-import org.terasology.engine.core.module.ModuleManager;
+import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.entitySystem.systems.RegisterSystem;
 import org.terasology.engine.rendering.dag.dependencyConnections.BufferPair;
 import org.terasology.engine.rendering.opengl.FBO;
 import org.terasology.engine.rendering.opengl.FboConfig;
 import org.terasology.engine.rendering.opengl.ScalingFactors;
 import org.terasology.engine.rendering.world.WorldRenderer;
-import org.terasology.naming.Name;
+import org.terasology.gestalt.naming.Name;
 import org.terasology.nui.properties.Range;
 
 @RegisterSystem
@@ -24,7 +24,7 @@ public abstract class ModuleRendering {
 
     // @In
     protected Context context;
-    protected ModuleManager moduleManager;
+    protected ModuleManagerImpl moduleManager;
     protected Name providingModule;
     protected RenderGraph renderGraph;
     protected WorldRenderer worldRenderer;
@@ -36,7 +36,7 @@ public abstract class ModuleRendering {
 
     public ModuleRendering(Context context) {
         this.context = context;
-        moduleManager = context.get(ModuleManager.class);
+        moduleManager = context.get(ModuleManagerImpl.class);
         providingModule = moduleManager.getEnvironment().getModuleProviding(this.getClass());
     }
 
@@ -78,7 +78,7 @@ public abstract class ModuleRendering {
     }
 
     protected void setProvidingModule(Class implementingClass) {
-        ModuleManager moduleManager = context.get(ModuleManager.class);
+        ModuleManagerImpl moduleManager = context.get(ModuleManagerImpl.class);
         this.providingModule = moduleManager.getEnvironment().getModuleProviding(implementingClass);
     }
 

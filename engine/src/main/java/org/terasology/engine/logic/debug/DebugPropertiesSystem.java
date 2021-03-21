@@ -5,7 +5,7 @@ package org.terasology.engine.logic.debug;
 import org.terasology.engine.entitySystem.systems.BaseComponentSystem;
 import org.terasology.engine.entitySystem.systems.RegisterMode;
 import org.terasology.engine.entitySystem.systems.RegisterSystem;
-import org.terasology.module.sandbox.API;
+import org.terasology.gestalt.module.sandbox.API;
 import org.terasology.nui.properties.OneOfProviderFactory;
 import org.terasology.reflection.reflect.ReflectFactory;
 import org.terasology.engine.registry.In;

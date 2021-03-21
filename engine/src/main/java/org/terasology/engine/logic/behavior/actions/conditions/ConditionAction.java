@@ -4,7 +4,7 @@ package org.terasology.engine.logic.behavior.actions.conditions;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.terasology.engine.core.module.ModuleManager;
+import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.entitySystem.Component;
 import org.terasology.engine.entitySystem.entity.EntityRef;
 import org.terasology.engine.entitySystem.metadata.ComponentLibrary;
@@ -37,7 +37,7 @@ public class ConditionAction extends BaseAction {
     protected String[] values;
 
     @In
-    private transient ModuleManager moduleManager;
+    private transient ModuleManagerImpl moduleManager;
 
     @In
     private transient ComponentLibrary componentLibrary;

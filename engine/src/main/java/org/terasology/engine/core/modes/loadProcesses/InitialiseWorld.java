@@ -13,14 +13,14 @@ import org.terasology.engine.core.GameEngine;
 import org.terasology.engine.core.TerasologyConstants;
 import org.terasology.engine.core.modes.SingleStepLoadProcess;
 import org.terasology.engine.core.modes.StateMainMenu;
-import org.terasology.engine.core.module.ModuleManager;
+import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.core.paths.PathManager;
 import org.terasology.engine.core.subsystem.RenderingSubsystemFactory;
 import org.terasology.engine.entitySystem.entity.EntityManager;
 import org.terasology.engine.entitySystem.entity.internal.EngineEntityManager;
 import org.terasology.engine.game.GameManifest;
 import org.terasology.engine.logic.players.LocalPlayer;
-import org.terasology.module.ModuleEnvironment;
+import org.terasology.gestalt.module.ModuleEnvironment;
 import org.terasology.engine.persistence.StorageManager;
 import org.terasology.engine.persistence.internal.ReadOnlyStorageManager;
 import org.terasology.engine.persistence.internal.ReadWriteStorageManager;
@@ -80,7 +80,7 @@ public class InitialiseWorld extends SingleStepLoadProcess {
         BlockManager blockManager = context.get(BlockManager.class);
         ExtraBlockDataManager extraDataManager = context.get(ExtraBlockDataManager.class);
 
-        ModuleEnvironment environment = context.get(ModuleManager.class).getEnvironment();
+        ModuleEnvironment environment = context.get(ModuleManagerImpl.class).getEnvironment();
         context.put(WorldGeneratorPluginLibrary.class, new DefaultWorldGeneratorPluginLibrary(environment, context));
 
         WorldInfo worldInfo = gameManifest.getWorldInfo(TerasologyConstants.MAIN_WORLD);

@@ -16,9 +16,9 @@
 package org.terasology.engine.core.module.rendering;
 
 import org.terasology.engine.context.Context;
-import org.terasology.module.ModuleEnvironment;
-import org.terasology.module.sandbox.API;
-import org.terasology.naming.Name;
+import org.terasology.gestalt.module.ModuleEnvironment;
+import org.terasology.gestalt.module.sandbox.API;
+import org.terasology.gestalt.naming.Name;
 import org.terasology.engine.rendering.dag.ModuleRendering;
 
 import javax.annotation.Nullable;

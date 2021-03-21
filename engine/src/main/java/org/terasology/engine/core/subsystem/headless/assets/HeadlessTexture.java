@@ -17,8 +17,9 @@ package org.terasology.engine.core.subsystem.headless.assets;
 
 import com.google.common.collect.Lists;
 import org.joml.Vector2i;
-import org.terasology.assets.AssetType;
-import org.terasology.assets.ResourceUrn;
+import org.terasology.gestalt.assets.AssetType;
+import org.terasology.gestalt.assets.DisposableResource;
+import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.joml.geom.Rectanglef;
 import org.terasology.joml.geom.Rectanglei;
 import org.terasology.engine.rendering.assets.texture.Texture;
@@ -35,10 +36,9 @@ public class HeadlessTexture extends Texture {
     private int id;
     private final DisposalAction disposalAction;
 
-    public HeadlessTexture(ResourceUrn urn, AssetType<?, TextureData> assetType, TextureData data) {
-        super(urn, assetType);
-        disposalAction = new DisposalAction();
-        getDisposalHook().setDisposeAction(disposalAction);
+    public HeadlessTexture(ResourceUrn urn, AssetType<?, TextureData> assetType, TextureData data, HeadlessTexture.DisposalAction disposalAction) {
+        super(urn, assetType, disposalAction);
+        this.disposalAction = disposalAction;
         reload(data);
         id = ID_COUNTER.getAndIncrement();
     }
@@ -132,12 +132,12 @@ public class HeadlessTexture extends Texture {
         disposalAction.disposalListeners.remove(subscriber);
     }
 
-    private static class DisposalAction implements Runnable {
+    public static class DisposalAction implements DisposableResource {
 
         private final List<Runnable> disposalListeners = Lists.newArrayList();
 
         @Override
-        public void run() {
+        public void close() {
             disposalListeners.forEach(java.lang.Runnable::run);
         }
     }

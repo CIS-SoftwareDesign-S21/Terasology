@@ -7,19 +7,19 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.terasology.assets.ResourceUrn;
+import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.engine.config.Config;
 import org.terasology.engine.config.ServerInfo;
 import org.terasology.engine.core.GameEngine;
 import org.terasology.engine.core.GameThread;
 import org.terasology.engine.core.modes.StateLoading;
-import org.terasology.engine.core.module.ModuleManager;
+import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.i18n.TranslationSystem;
 import org.terasology.engine.identity.storageServiceClient.StorageServiceWorker;
 import org.terasology.engine.rendering.nui.animation.MenuAnimationSystems;
+import org.terasology.gestalt.module.ModuleRegistry;
+import org.terasology.gestalt.naming.NameVersion;
 import org.terasology.input.Keyboard;
-import org.terasology.module.ModuleRegistry;
-import org.terasology.naming.NameVersion;
 import org.terasology.engine.network.JoinStatus;
 import org.terasology.engine.network.NetworkSystem;
 import org.terasology.engine.network.PingService;
@@ -70,7 +70,7 @@ public class JoinGameScreen extends CoreScreenLayer {
     private GameEngine engine;
 
     @In
-    private ModuleManager moduleManager;
+    private ModuleManagerImpl moduleManager;
 
     @In
     private TranslationSystem translationSystem;

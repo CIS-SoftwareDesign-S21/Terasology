@@ -3,10 +3,10 @@
 
 package org.terasology.engine.core.bootstrap;
 
-import org.terasology.assets.ResourceUrn;
+import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.engine.audio.events.PlaySoundEvent;
 import org.terasology.engine.context.Context;
-import org.terasology.engine.core.module.ModuleManager;
+import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.entitySystem.Component;
 import org.terasology.engine.entitySystem.entity.EntityManager;
 import org.terasology.engine.entitySystem.entity.EntityRef;
@@ -39,8 +39,8 @@ import org.terasology.engine.recording.RecordAndReplayStatus;
 import org.terasology.engine.recording.RecordAndReplayUtils;
 import org.terasology.engine.recording.RecordedEventStore;
 import org.terasology.engine.recording.RecordingEventSystemDecorator;
-import org.terasology.module.ModuleEnvironment;
-import org.terasology.naming.Name;
+import org.terasology.gestalt.module.ModuleEnvironment;
+import org.terasology.gestalt.naming.Name;
 import org.terasology.nui.properties.OneOfProviderFactory;
 import org.terasology.persistence.typeHandling.TypeHandlerLibrary;
 import org.terasology.reflection.TypeRegistry;
@@ -69,7 +69,7 @@ public final class EntitySystemSetupUtil {
         CopyStrategyLibrary copyStrategyLibrary = new CopyStrategyLibrary(reflectFactory);
         context.put(CopyStrategyLibrary.class, copyStrategyLibrary);
 
-        ModuleManager moduleManager = context.get(ModuleManager.class);
+        ModuleManagerImpl moduleManager = context.get(ModuleManagerImpl.class);
         TypeRegistry typeRegistry = context.get(TypeRegistry.class);
         TypeHandlerLibrary typeHandlerLibrary = TypeHandlerLibraryImpl.forModuleEnvironment(moduleManager, typeRegistry);
         context.put(TypeHandlerLibrary.class, typeHandlerLibrary);
@@ -101,7 +101,7 @@ public final class EntitySystemSetupUtil {
      * </ul>
      */
     public static void addEntityManagementRelatedClasses(Context context) {
-        ModuleManager moduleManager = context.get(ModuleManager.class);
+        ModuleManagerImpl moduleManager = context.get(ModuleManagerImpl.class);
         ModuleEnvironment environment = moduleManager.getEnvironment();
         NetworkSystem networkSystem = context.get(NetworkSystem.class);
 

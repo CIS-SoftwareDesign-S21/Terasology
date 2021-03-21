@@ -18,9 +18,9 @@ package org.terasology.documentation;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.SortedSetMultimap;
 import org.terasology.engine.core.module.ExternalApiWhitelist;
-import org.terasology.engine.core.module.ModuleManager;
-import org.terasology.module.ModuleEnvironment;
-import org.terasology.module.sandbox.API;
+import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.gestalt.module.ModuleEnvironment;
+import org.terasology.gestalt.module.sandbox.API;
 import org.terasology.engine.testUtil.ModuleManagerFactory;
 
 import java.net.URL;
@@ -41,7 +41,7 @@ public final class ApiScraper {
      * @throws Exception if the module environment cannot be loaded
      */
     public static void main(String[] args) throws Exception {
-        ModuleManager moduleManager = ModuleManagerFactory.create();
+        ModuleManagerImpl moduleManager = ModuleManagerFactory.create();
         ModuleEnvironment environment = moduleManager.getEnvironment();
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 

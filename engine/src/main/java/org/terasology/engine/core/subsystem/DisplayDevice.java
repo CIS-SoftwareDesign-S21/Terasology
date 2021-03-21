@@ -15,7 +15,7 @@
  */
 package org.terasology.engine.core.subsystem;
 
-import org.terasology.module.sandbox.API;
+import org.terasology.gestalt.module.sandbox.API;
 import org.terasology.engine.rendering.nui.layers.mainMenu.videoSettings.DisplayModeSetting;
 import org.terasology.engine.utilities.subscribables.Subscribable;
 

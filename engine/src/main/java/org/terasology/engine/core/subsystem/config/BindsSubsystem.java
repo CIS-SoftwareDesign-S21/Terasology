@@ -24,12 +24,16 @@ import org.terasology.engine.config.Config;
 import org.terasology.engine.config.facade.BindsConfiguration;
 import org.terasology.engine.context.Context;
 import org.terasology.engine.core.SimpleUri;
-import org.terasology.engine.core.module.ModuleManager;
+import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.core.subsystem.EngineSubsystem;
 import org.terasology.engine.input.BindAxisEvent;
 import org.terasology.engine.input.BindButtonEvent;
 import org.terasology.engine.input.BindableAxis;
 import org.terasology.engine.input.BindableButton;
+import org.terasology.gestalt.module.dependencyresolution.DependencyResolver;
+import org.terasology.gestalt.module.dependencyresolution.ResolutionResult;
+import org.terasology.gestalt.module.predicates.FromModule;
+import org.terasology.gestalt.module.resources.DirectoryFileSource;
 import org.terasology.input.ControllerInput;
 import org.terasology.engine.input.DefaultBinding;
 import org.terasology.input.Input;
@@ -44,11 +48,8 @@ import org.terasology.engine.input.internal.AbstractBindableAxis;
 import org.terasology.engine.input.internal.BindableAxisImpl;
 import org.terasology.engine.input.internal.BindableButtonImpl;
 import org.terasology.engine.input.internal.BindableRealAxis;
-import org.terasology.module.DependencyResolver;
-import org.terasology.module.ModuleEnvironment;
-import org.terasology.module.ResolutionResult;
-import org.terasology.module.predicates.FromModule;
-import org.terasology.naming.Name;
+import org.terasology.gestalt.module.ModuleEnvironment;
+import org.terasology.gestalt.naming.Name;
 
 import java.lang.annotation.Annotation;
 import java.util.Collection;
@@ -146,10 +147,10 @@ public class BindsSubsystem implements EngineSubsystem, BindsManager {
     }
 
     private void updateDefaultBinds(Context passedContext, BindsConfiguration config) {
-        ModuleManager moduleManager = passedContext.get(ModuleManager.class);
+        ModuleManagerImpl moduleManager = passedContext.get(ModuleManagerImpl.class);
         DependencyResolver resolver = new DependencyResolver(moduleManager.getRegistry());
         for (Name moduleId : moduleManager.getRegistry().getModuleIds()) {
-            if (moduleManager.getRegistry().getLatestModuleVersion(moduleId).isCodeModule()) {
+            if (moduleManager.getRegistry().getLatestModuleVersion(moduleId).getResources() instanceof DirectoryFileSource) {
                 ResolutionResult result = resolver.resolve(moduleId);
                 if (result.isSuccess()) {
                     try (ModuleEnvironment environment = moduleManager.loadEnvironment(result.getModules(), false)) {
@@ -210,7 +211,7 @@ public class BindsSubsystem implements EngineSubsystem, BindsManager {
 
     @Override
     public void registerBinds() {
-        ModuleManager moduleManager = context.get(ModuleManager.class);
+        ModuleManagerImpl moduleManager = context.get(ModuleManagerImpl.class);
         ModuleEnvironment environment = moduleManager.getEnvironment();
         clearBinds();
         registerButtonBinds(environment);

@@ -8,7 +8,7 @@ import org.terasology.engine.input.DefaultBinding;
 import org.terasology.engine.input.RegisterBindButton;
 import org.terasology.input.InputType;
 import org.terasology.input.ControllerId;
-import org.terasology.module.sandbox.API;
+import org.terasology.gestalt.module.sandbox.API;
 
 /**
  */

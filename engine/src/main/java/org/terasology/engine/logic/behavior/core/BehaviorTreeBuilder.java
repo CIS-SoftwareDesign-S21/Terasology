@@ -21,12 +21,12 @@ import com.google.gson.stream.JsonWriter;
 import org.apache.commons.codec.Charsets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.terasology.assets.ResourceUrn;
-import org.terasology.assets.management.AssetManager;
-import org.terasology.engine.core.module.ModuleManager;
+import org.terasology.gestalt.assets.ResourceUrn;
+import org.terasology.gestalt.assets.management.AssetManager;
+import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.logic.behavior.asset.BehaviorTree;
 import org.terasology.engine.logic.behavior.BehaviorAction;
-import org.terasology.module.ModuleEnvironment;
+import org.terasology.gestalt.module.ModuleEnvironment;
 import org.terasology.engine.registry.CoreRegistry;
 import org.terasology.engine.registry.InjectionHelper;
 import org.terasology.engine.utilities.gson.UriTypeAdapterFactory;
@@ -57,7 +57,7 @@ public class BehaviorTreeBuilder implements JsonDeserializer<BehaviorNode>, Json
 
     public BehaviorTreeBuilder() {
 
-        ModuleManager moduleManager = CoreRegistry.get(ModuleManager.class);
+        ModuleManagerImpl moduleManager = CoreRegistry.get(ModuleManagerImpl.class);
 
         if (moduleManager != null) {
             ModuleEnvironment environment = moduleManager.getEnvironment();

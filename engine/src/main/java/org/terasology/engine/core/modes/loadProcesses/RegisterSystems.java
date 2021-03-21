@@ -21,7 +21,7 @@ import org.terasology.engine.core.ComponentSystemManager;
 import org.terasology.engine.core.GameEngine;
 import org.terasology.engine.core.TerasologyEngine;
 import org.terasology.engine.core.modes.SingleStepLoadProcess;
-import org.terasology.engine.core.module.ModuleManager;
+import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.core.subsystem.EngineSubsystem;
 import org.terasology.engine.network.NetworkMode;
 
@@ -45,7 +45,7 @@ public class RegisterSystems extends SingleStepLoadProcess {
     @Override
     public boolean step() {
         componentSystemManager = context.get(ComponentSystemManager.class);
-        ModuleManager moduleManager = context.get(ModuleManager.class);
+        ModuleManagerImpl moduleManager = context.get(ModuleManagerImpl.class);
 
         TerasologyEngine terasologyEngine = (TerasologyEngine) context.get(GameEngine.class);
         for (EngineSubsystem subsystem : terasologyEngine.getSubsystems()) {

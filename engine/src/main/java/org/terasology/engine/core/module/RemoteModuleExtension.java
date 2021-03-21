@@ -19,8 +19,7 @@ package org.terasology.engine.core.module;
 import java.net.URL;
 import java.util.Date;
 
-import org.terasology.module.ModuleMetadata;
-
+import org.terasology.gestalt.module.ModuleMetadata;
 /**
  * A set of module extensions for remote modules.
  * NOTE: this is copy&paste from meta-server.

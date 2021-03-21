@@ -3,7 +3,7 @@
 package org.terasology.engine.world.chunks;
 
 import org.terasology.joml.geom.AABBfc;
-import org.terasology.module.sandbox.API;
+import org.terasology.gestalt.module.sandbox.API;
 import org.terasology.engine.rendering.primitives.ChunkMesh;
 
 /**

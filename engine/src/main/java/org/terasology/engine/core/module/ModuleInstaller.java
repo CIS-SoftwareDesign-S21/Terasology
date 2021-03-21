@@ -19,11 +19,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.terasology.engine.core.TerasologyConstants;
 import org.terasology.engine.core.paths.PathManager;
-import org.terasology.module.Module;
-import org.terasology.module.ModuleLoader;
-import org.terasology.module.ModuleMetadata;
 import org.terasology.engine.utilities.download.MultiFileDownloader;
 import org.terasology.engine.utilities.download.MultiFileTransferProgressListener;
+import org.terasology.gestalt.module.Module;
+import org.terasology.gestalt.module.ModuleMetadata;
 
 import java.io.IOException;
 import java.net.URI;
@@ -40,10 +39,10 @@ public class ModuleInstaller implements Callable<List<Module>> {
     private static final Logger logger = LoggerFactory.getLogger(ModuleInstaller.class);
 
     private Iterable<Module> moduleList;
-    private ModuleManager moduleManager;
+    private ModuleManagerImpl moduleManager;
     private MultiFileTransferProgressListener downloadProgressListener;
 
-    ModuleInstaller(ModuleManager moduleManager, Iterable<Module> moduleList,
+    ModuleInstaller(ModuleManagerImpl moduleManager, Iterable<Module> moduleList,
                     MultiFileTransferProgressListener downloadProgressListener) {
         this.moduleList = moduleList;
         this.downloadProgressListener = downloadProgressListener;
@@ -58,11 +57,11 @@ public class ModuleInstaller implements Callable<List<Module>> {
         List<Path> downloadedModulesPaths = downloader.call();
         logger.info("Module download completed, loading the new modules...");
         List<Module> newInstalledModules = new ArrayList<>(downloadedModulesPaths.size());
-        ModuleLoader loader = new ModuleLoader(moduleManager.getModuleMetadataReader());
-        loader.setModuleInfoPath(TerasologyConstants.MODULE_INFO_FILENAME);
+//        ModuleLoader loader = new ModuleLoader(moduleManager.getModuleMetadataReader());
+//        loader.setModuleInfoPath(TerasologyConstants.MODULE_INFO_FILENAME);
         for (Path filePath : downloadedModulesPaths) {
             try {
-                Module module = loader.load(filePath);
+                Module module = moduleManager.getModuleFactory().createModule(filePath.toFile());
                 moduleManager.getRegistry().add(module);
                 newInstalledModules.add(module);
             } catch (IOException e) {
@@ -75,7 +74,7 @@ public class ModuleInstaller implements Callable<List<Module>> {
 
     private Map<URI, Path> getDownloadUrls(Iterable<Module> modules) {
         Map<URI, Path> result = new HashMap<>();
-        for (Module module: modules) {
+        for (Module module : modules) {
             ModuleMetadata metadata = module.getMetadata();
             String version = metadata.getVersion().toString();
             String id = metadata.getId().toString();

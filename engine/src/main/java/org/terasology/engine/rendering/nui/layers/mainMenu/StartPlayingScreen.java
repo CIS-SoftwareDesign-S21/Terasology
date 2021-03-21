@@ -3,14 +3,14 @@
 package org.terasology.engine.rendering.nui.layers.mainMenu;
 
 import org.joml.Vector2i;
-import org.terasology.assets.ResourceUrn;
+import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.engine.config.Config;
 import org.terasology.engine.context.Context;
 import org.terasology.engine.core.GameEngine;
 import org.terasology.engine.core.SimpleUri;
 import org.terasology.engine.core.TerasologyConstants;
 import org.terasology.engine.core.modes.StateLoading;
-import org.terasology.engine.core.module.ModuleManager;
+import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.game.GameManifest;
 import org.terasology.engine.i18n.TranslationSystem;
 import org.terasology.engine.rendering.assets.texture.Texture;
@@ -34,7 +34,7 @@ public class StartPlayingScreen extends CoreScreenLayer {
     public static final ResourceUrn ASSET_URI = new ResourceUrn("engine:startPlayingScreen");
 
     @In
-    private ModuleManager moduleManager;
+    private ModuleManagerImpl moduleManager;
 
     @In
     private Config config;

@@ -28,7 +28,7 @@ import org.terasology.engine.core.TerasologyConstants;
 import org.terasology.engine.core.bootstrap.EntitySystemSetupUtil;
 import org.terasology.engine.core.modes.GameState;
 import org.terasology.engine.core.modes.StateLoading;
-import org.terasology.engine.core.module.ModuleManager;
+import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.core.module.StandardModuleExtension;
 import org.terasology.engine.entitySystem.entity.EntityRef;
 import org.terasology.engine.entitySystem.entity.internal.EngineEntityManager;
@@ -40,8 +40,8 @@ import org.terasology.engine.logic.console.ConsoleImpl;
 import org.terasology.engine.logic.console.ConsoleSystem;
 import org.terasology.engine.logic.console.commands.CoreCommands;
 import org.terasology.engine.logic.players.LocalPlayer;
-import org.terasology.module.Module;
-import org.terasology.naming.Name;
+import org.terasology.gestalt.module.Module;
+import org.terasology.gestalt.naming.Name;
 import org.terasology.engine.network.ClientComponent;
 import org.terasology.engine.network.NetworkMode;
 import org.terasology.engine.recording.DirectionAndOriginPosRecorderList;
@@ -125,7 +125,7 @@ public class StateHeadlessSetup implements GameState {
         GameManifest gameManifest = new GameManifest();
 
         Config config = context.get(Config.class);
-        ModuleManager moduleManager = context.get(ModuleManager.class);
+        ModuleManagerImpl moduleManager = context.get(ModuleManagerImpl.class);
         for (Name moduleName : config.getDefaultModSelection().listModules()) {
             Module module = moduleManager.getRegistry().getLatestModuleVersion(moduleName);
             if (module != null) {

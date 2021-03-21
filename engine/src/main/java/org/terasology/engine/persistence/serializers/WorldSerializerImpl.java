@@ -21,9 +21,9 @@ import com.google.common.collect.Maps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.terasology.engine.utilities.Assets;
-import org.terasology.assets.ResourceUrn;
+import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.engine.core.SimpleUri;
-import org.terasology.engine.core.module.ModuleManager;
+import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.entitySystem.Component;
 import org.terasology.engine.entitySystem.entity.EntityRef;
 import org.terasology.engine.entitySystem.entity.internal.EngineEntityManager;
@@ -49,7 +49,7 @@ public class WorldSerializerImpl implements WorldSerializer {
 
     private static final Logger logger = LoggerFactory.getLogger(WorldSerializerImpl.class);
 
-    private ModuleManager moduleManager = CoreRegistry.get(ModuleManager.class);
+    private ModuleManagerImpl moduleManager = CoreRegistry.get(ModuleManagerImpl.class);
     private ComponentLibrary componentLibrary;
     private PrefabManager prefabManager;
     private EngineEntityManager entityManager;

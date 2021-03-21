@@ -11,7 +11,7 @@ import org.terasology.engine.config.RenderingConfig;
 import org.terasology.engine.context.Context;
 import org.terasology.engine.core.GameEngine;
 import org.terasology.engine.core.modes.StateMainMenu;
-import org.terasology.engine.core.module.ModuleManager;
+import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.core.module.rendering.RenderingModuleRegistry;
 import org.terasology.engine.core.subsystem.DisplayDevice;
 import org.terasology.engine.core.subsystem.lwjgl.GLBufferPool;
@@ -193,7 +193,7 @@ public final class WorldRendererImpl implements WorldRenderer {
         // registry not populated by new ModuleRendering instances in UI, populate now
         if (renderingModuleRegistry.getOrderedRenderingModules().isEmpty()) {
             List<ModuleRendering> renderingModules = renderingModuleRegistry.updateRenderingModulesOrder(
-                    context.get(ModuleManager.class).getEnvironment(), context);
+                    context.get(ModuleManagerImpl.class).getEnvironment(), context);
             if (renderingModules.isEmpty()) {
                 GameEngine gameEngine = context.get(GameEngine.class);
                 gameEngine.changeState(new StateMainMenu("No rendering module loaded, unable to render. Try enabling CoreRendering."));

@@ -17,7 +17,7 @@ package org.terasology.documentation;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
-import org.terasology.engine.core.module.ModuleManager;
+import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.input.DefaultBinding;
 import org.terasology.engine.input.DefaultBindings;
 import org.terasology.input.Input;
@@ -42,7 +42,7 @@ public final class BindingScraper {
      * @throws Exception if the module environment cannot be loaded
      */
     public static void main(String[] args) throws Exception {
-        ModuleManager moduleManager = ModuleManagerFactory.create();
+        ModuleManagerImpl moduleManager = ModuleManagerFactory.create();
 
         // Holds normal input mappings where there is only one key
         Multimap<InputCategory, String> categories = ArrayListMultimap.create();

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package org.terasology.engine.rendering.nui;
 
-import org.terasology.assets.ResourceUrn;
+import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.engine.entitySystem.systems.ComponentSystem;
 import org.terasology.engine.rendering.nui.layers.hud.HUDScreenLayer;
 import org.terasology.nui.ControlWidget;

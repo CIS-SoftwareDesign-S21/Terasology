@@ -5,8 +5,8 @@ package org.terasology.engine.logic.console.commands;
 import com.google.common.collect.Ordering;
 import com.google.common.collect.Streams;
 import org.joml.Vector3f;
-import org.terasology.assets.ResourceUrn;
-import org.terasology.assets.management.AssetManager;
+import org.terasology.gestalt.assets.ResourceUrn;
+import org.terasology.gestalt.assets.management.AssetManager;
 import org.terasology.engine.config.SystemConfig;
 import org.terasology.engine.core.GameEngine;
 import org.terasology.engine.core.SimpleUri;
@@ -14,7 +14,7 @@ import org.terasology.engine.core.TerasologyConstants;
 import org.terasology.engine.core.Time;
 import org.terasology.engine.core.modes.StateLoading;
 import org.terasology.engine.core.modes.StateMainMenu;
-import org.terasology.engine.core.module.ModuleManager;
+import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.core.paths.PathManager;
 import org.terasology.engine.core.subsystem.DisplayDevice;
 import org.terasology.engine.entitySystem.Component;
@@ -40,7 +40,7 @@ import org.terasology.engine.logic.console.Console;
 import org.terasology.engine.logic.console.ConsoleColors;
 import org.terasology.engine.logic.permission.PermissionManager;
 import org.terasology.engine.math.Direction;
-import org.terasology.naming.Name;
+import org.terasology.gestalt.naming.Name;
 import org.terasology.engine.network.ClientComponent;
 import org.terasology.engine.network.JoinStatus;
 import org.terasology.engine.network.NetworkMode;
@@ -128,7 +128,7 @@ public class CoreCommands extends BaseComponentSystem {
     private SystemConfig systemConfig;
 
     @In
-    private ModuleManager moduleManager;
+    private ModuleManagerImpl moduleManager;
 
     /**
      * Determine if command is matching one of criteria

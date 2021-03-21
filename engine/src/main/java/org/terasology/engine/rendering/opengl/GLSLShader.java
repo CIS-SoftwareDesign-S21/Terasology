@@ -14,8 +14,9 @@ import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL32;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.terasology.assets.AssetType;
-import org.terasology.assets.ResourceUrn;
+import org.terasology.gestalt.assets.AssetType;
+import org.terasology.gestalt.assets.DisposableResource;
+import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.engine.config.Config;
 import org.terasology.engine.config.RenderingConfig;
 import org.terasology.engine.core.GameThread;
@@ -87,11 +88,10 @@ public class GLSLShader extends Shader {
 
     private DisposalAction disposalAction;
 
-    public GLSLShader(ResourceUrn urn, AssetType<?, ShaderData> assetType, ShaderData data, LwjglGraphicsProcessing graphicsProcessing) {
-        super(urn, assetType);
+    public GLSLShader(ResourceUrn urn, AssetType<?, ShaderData> assetType, ShaderData data, LwjglGraphicsProcessing graphicsProcessing, GLSLShader.DisposalAction disposalAction) {
+        super(urn, assetType, disposalAction);
+        this.disposalAction = disposalAction;
         this.graphicsProcessing = graphicsProcessing;
-        disposalAction = new DisposalAction(urn, graphicsProcessing);
-        getDisposalHook().setDisposeAction(disposalAction);
         graphicsProcessing.asynchToDisplayThread(() -> {
             reload(data);
         });
@@ -401,7 +401,7 @@ public class GLSLShader extends Shader {
         }
     }
 
-    private static class DisposalAction implements Runnable {
+    public static class DisposalAction implements DisposableResource {
 
         private final ResourceUrn urn;
         private final LwjglGraphicsProcessing graphicsProcessing;
@@ -411,19 +411,9 @@ public class GLSLShader extends Shader {
         private final TIntIntMap geometryPrograms = new TIntIntHashMap();
 
         // made package-private after CheckStyle's suggestion
-        DisposalAction(ResourceUrn urn, LwjglGraphicsProcessing graphicsProcessing) {
+        public DisposalAction(ResourceUrn urn, LwjglGraphicsProcessing graphicsProcessing) {
             this.urn = urn;
             this.graphicsProcessing = graphicsProcessing;
-        }
-
-        @Override
-        public void run() {
-            logger.debug("Disposing shader {}.", urn);
-            try {
-                GameThread.synch(this::disposeData);
-            } catch (InterruptedException e) {
-                logger.error("Failed to dispose {}", urn, e);
-            }
         }
 
         private void disposeData() {
@@ -442,6 +432,16 @@ public class GLSLShader extends Shader {
                 }
             });
             programs.clear();
+        }
+
+        @Override
+        public void close() {
+            logger.debug("Disposing shader {}.", urn);
+            try {
+                GameThread.synch(this::disposeData);
+            } catch (InterruptedException e) {
+                logger.error("Failed to dispose {}", urn, e);
+            }
         }
     }
 }

@@ -16,8 +16,8 @@
 
 package org.terasology.engine.core.modes.loadProcesses;
 
-import org.terasology.assets.ResourceUrn;
-import org.terasology.assets.management.AssetManager;
+import org.terasology.gestalt.assets.ResourceUrn;
+import org.terasology.gestalt.assets.management.AssetManager;
 import org.terasology.engine.context.Context;
 import org.terasology.engine.core.modes.StepBasedLoadProcess;
 import org.terasology.engine.entitySystem.prefab.Prefab;

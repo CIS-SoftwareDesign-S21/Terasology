@@ -14,13 +14,13 @@ import org.terasology.engine.core.EngineTime;
 import org.terasology.engine.core.Time;
 import org.terasology.engine.core.bootstrap.EntitySystemSetupUtil;
 import org.terasology.engine.core.modes.loadProcesses.LoadPrefabs;
-import org.terasology.engine.core.module.ModuleManager;
+import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.core.paths.PathManager;
 import org.terasology.engine.entitySystem.entity.internal.EngineEntityManager;
 import org.terasology.engine.game.Game;
 import org.terasology.engine.logic.console.Console;
 import org.terasology.engine.logic.console.ConsoleImpl;
-import org.terasology.naming.Name;
+import org.terasology.gestalt.naming.Name;
 import org.terasology.engine.network.NetworkSystem;
 import org.terasology.engine.network.internal.NetworkSystemImpl;
 import org.terasology.engine.persistence.StorageManager;
@@ -46,7 +46,7 @@ import static org.mockito.Mockito.mock;
 public abstract class TerasologyTestingEnvironment {
     protected static Context context;
 
-    private static ModuleManager moduleManager;
+    private static ModuleManagerImpl moduleManager;
 
     private static HeadlessEnvironment env;
 
@@ -64,14 +64,14 @@ public abstract class TerasologyTestingEnvironment {
          */
         env = new HeadlessEnvironment(new Name("engine"), new Name("unittest"));
         context = env.getContext();
-        moduleManager = context.get(ModuleManager.class);
+        moduleManager = context.get(ModuleManagerImpl.class);
 
     }
 
     @BeforeEach
     public void setup() throws Exception {
 
-        context.put(ModuleManager.class, moduleManager);
+        context.put(ModuleManagerImpl.class, moduleManager);
         RecordAndReplayCurrentStatus recordAndReplayCurrentStatus = context.get(RecordAndReplayCurrentStatus.class);
 
         mockTime = mock(EngineTime.class);

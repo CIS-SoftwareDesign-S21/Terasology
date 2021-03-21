@@ -4,8 +4,8 @@ package org.terasology.engine;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.terasology.assets.management.AssetManager;
-import org.terasology.assets.module.ModuleAwareAssetTypeManager;
+import org.terasology.gestalt.assets.management.AssetManager;
+import org.terasology.gestalt.assets.module.ModuleAwareAssetTypeManager;
 import org.terasology.engine.audio.AudioManager;
 import org.terasology.engine.audio.StaticSound;
 import org.terasology.engine.audio.StreamingSound;
@@ -20,7 +20,7 @@ import org.terasology.engine.core.Time;
 import org.terasology.engine.core.bootstrap.EntitySystemSetupUtil;
 import org.terasology.engine.core.modes.loadProcesses.LoadPrefabs;
 import org.terasology.engine.core.module.ExternalApiWhitelist;
-import org.terasology.engine.core.module.ModuleManager;
+import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.core.paths.PathManager;
 import org.terasology.engine.core.subsystem.headless.assets.HeadlessMaterial;
 import org.terasology.engine.core.subsystem.headless.assets.HeadlessMesh;
@@ -77,11 +77,11 @@ import org.terasology.engine.world.sun.CelestialSystem;
 import org.terasology.engine.world.sun.DefaultCelestialSystem;
 import org.terasology.engine.world.time.WorldTime;
 import org.terasology.engine.world.time.WorldTimeImpl;
-import org.terasology.module.DependencyResolver;
-import org.terasology.module.ModuleEnvironment;
+import org.terasology.gestalt.module.dependencyresolution.DependencyResolver;
+import org.terasology.gestalt.module.ModuleEnvironment;
 import org.terasology.module.ModuleRegistry;
 import org.terasology.module.ResolutionResult;
-import org.terasology.naming.Name;
+import org.terasology.gestalt.naming.Name;
 import org.terasology.nui.asset.UIElement;
 import org.terasology.nui.skin.UISkin;
 import org.terasology.persistence.typeHandling.TypeHandlerLibrary;
@@ -117,7 +117,7 @@ public class HeadlessEnvironment extends Environment {
 
     @Override
     protected void setupStorageManager() throws IOException {
-        ModuleManager moduleManager = context.get(ModuleManager.class);
+        ModuleManagerImpl moduleManager = context.get(ModuleManagerImpl.class);
         EngineEntityManager engineEntityManager = context.get(EngineEntityManager.class);
         BlockManager blockManager = context.get(BlockManager.class);
         RecordAndReplaySerializer recordAndReplaySerializer = context.get(RecordAndReplaySerializer.class);
@@ -125,9 +125,9 @@ public class HeadlessEnvironment extends Environment {
         RecordAndReplayUtils recordAndReplayUtils = new RecordAndReplayUtils();
         RecordAndReplayCurrentStatus recordAndReplayCurrentStatus = context.get(RecordAndReplayCurrentStatus.class);
 
-        ModuleEnvironment environment = context.get(ModuleManager.class).getEnvironment();
+        ModuleEnvironment environment = context.get(ModuleManagerImpl.class).getEnvironment();
         context.put(BlockFamilyLibrary.class, new BlockFamilyLibrary(environment,context));
-        
+
         ExtraBlockDataManager extraDataManager = context.get(ExtraBlockDataManager.class);
 
         context.put(StorageManager.class, new ReadWriteStorageManager(savePath, moduleManager.getEnvironment(),
@@ -163,7 +163,7 @@ public class HeadlessEnvironment extends Environment {
         typeHandlerLibrary.addTypeHandler(BlockFamily.class, new BlockFamilyTypeHandler(blockManager));
         typeHandlerLibrary.addTypeHandler(Block.class, new BlockTypeHandler(blockManager));
     }
-    
+
     @Override
     protected void setupExtraDataManager(Context context) {
         context.put(ExtraBlockDataManager.class, new ExtraBlockDataManager(context));
@@ -172,7 +172,7 @@ public class HeadlessEnvironment extends Environment {
     @Override
     protected AssetManager setupEmptyAssetManager() {
         ModuleAwareAssetTypeManager assetTypeManager = new ModuleAwareAssetTypeManager();
-        assetTypeManager.switchEnvironment(context.get(ModuleManager.class).getEnvironment());
+        assetTypeManager.switchEnvironment(context.get(ModuleManagerImpl.class).getEnvironment());
 
         context.put(ModuleAwareAssetTypeManager.class, assetTypeManager);
         context.put(AssetManager.class, assetTypeManager.getAssetManager());
@@ -230,7 +230,7 @@ public class HeadlessEnvironment extends Environment {
                 Atlas::new, "atlas");
         assetTypeManager.registerCoreAssetType(Subtexture.class, Subtexture::new);
 
-        assetTypeManager.switchEnvironment(context.get(ModuleManager.class).getEnvironment());
+        assetTypeManager.switchEnvironment(context.get(ModuleManagerImpl.class).getEnvironment());
 
         context.put(ModuleAwareAssetTypeManager.class, assetTypeManager);
         context.put(AssetManager.class, assetTypeManager.getAssetManager());
@@ -256,7 +256,7 @@ public class HeadlessEnvironment extends Environment {
         TypeRegistry.WHITELISTED_CLASSES = ExternalApiWhitelist.CLASSES.stream().map(Class::getName).collect(Collectors.toSet());
         context.put(TypeRegistry.class, typeRegistry);
 
-        ModuleManager moduleManager = ModuleManagerFactory.create(true);
+        ModuleManagerImpl moduleManager = ModuleManagerFactory.create(true);
         ModuleRegistry registry = moduleManager.getRegistry();
 
         DependencyResolver resolver = new DependencyResolver(registry);
@@ -270,7 +270,7 @@ public class HeadlessEnvironment extends Environment {
             logger.error("Could not resolve module dependencies for " + moduleNames);
         }
 
-        context.put(ModuleManager.class, moduleManager);
+        context.put(ModuleManagerImpl.class, moduleManager);
 
         EntitySystemSetupUtil.addReflectionBasedLibraries(context);
     }

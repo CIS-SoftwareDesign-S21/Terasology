@@ -14,7 +14,7 @@ import org.terasology.engine.config.SystemConfig;
 import org.terasology.engine.config.UniverseConfig;
 import org.terasology.engine.core.ComponentSystemManager;
 import org.terasology.engine.core.Time;
-import org.terasology.engine.core.module.ModuleManager;
+import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.core.paths.PathManager;
 import org.terasology.engine.entitySystem.Component;
 import org.terasology.engine.entitySystem.entity.EntityRef;
@@ -49,8 +49,8 @@ import org.terasology.engine.world.chunks.ManagedChunk;
 import org.terasology.engine.world.chunks.blockdata.ExtraBlockDataManager;
 import org.terasology.engine.world.chunks.internal.ChunkImpl;
 import org.terasology.engine.world.internal.WorldInfo;
-import org.terasology.module.Module;
-import org.terasology.module.ModuleEnvironment;
+import org.terasology.gestalt.module.Module;
+import org.terasology.gestalt.module.ModuleEnvironment;
 import org.terasology.persistence.typeHandling.TypeHandlerLibrary;
 import org.terasology.protobuf.EntityData;
 
@@ -355,7 +355,7 @@ public final class ReadWriteStorageManager extends AbstractStorageManager implem
         Game game = CoreRegistry.get(Game.class);
 
         GameManifest gameManifest = new GameManifest(game.getName(), game.getSeed(), time.getGameTimeInMs());
-        for (Module module : CoreRegistry.get(ModuleManager.class).getEnvironment()) {
+        for (Module module : CoreRegistry.get(ModuleManagerImpl.class).getEnvironment()) {
             gameManifest.addModule(module.getId(), module.getVersion());
         }
 
