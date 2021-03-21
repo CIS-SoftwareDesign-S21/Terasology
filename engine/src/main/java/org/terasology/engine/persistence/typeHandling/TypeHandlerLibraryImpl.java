@@ -12,6 +12,7 @@ import org.joml.Vector3ic;
 import org.joml.Vector4fc;
 import org.joml.Vector4ic;
 import org.reflections.Reflections;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.entitySystem.prefab.Prefab;
 import org.terasology.engine.math.IntegerRange;
@@ -81,7 +82,7 @@ public class TypeHandlerLibraryImpl extends TypeHandlerLibrary {
         addTypeHandlerFactory(new ComponentClassTypeHandlerFactory());
     }
 
-    public TypeHandlerLibraryImpl(ModuleManagerImpl moduleManager, TypeRegistry typeRegistry) {
+    public TypeHandlerLibraryImpl(ModuleManager moduleManager, TypeRegistry typeRegistry) {
         super(new ModuleEnvironmentSandbox(moduleManager, typeRegistry));
     }
 
@@ -94,7 +95,7 @@ public class TypeHandlerLibraryImpl extends TypeHandlerLibrary {
         return library;
     }
 
-    public static TypeHandlerLibrary forModuleEnvironment(ModuleManagerImpl moduleManager, TypeRegistry typeRegistry) {
+    public static TypeHandlerLibrary forModuleEnvironment(ModuleManager moduleManager, TypeRegistry typeRegistry) {
         TypeHandlerLibrary library = new TypeHandlerLibraryImpl(moduleManager, typeRegistry);
 
         populateWithDefaultHandlers(library);

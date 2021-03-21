@@ -6,7 +6,7 @@ import com.google.common.collect.Lists;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.terasology.assets.AssetFactory;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.gestalt.assets.management.AssetManager;
 import org.terasology.gestalt.assets.module.ModuleAwareAssetTypeManager;
@@ -29,6 +29,7 @@ import org.terasology.engine.entitySystem.stubs.StringComponent;
 import org.terasology.engine.network.NetworkMode;
 import org.terasology.engine.network.NetworkSystem;
 import org.terasology.engine.persistence.serializers.EntitySerializer;
+import org.terasology.gestalt.assets.module.ModuleAwareAssetTypeManagerImpl;
 import org.terasology.protobuf.EntityData;
 import org.terasology.engine.recording.RecordAndReplayCurrentStatus;
 import org.terasology.engine.registry.CoreRegistry;
@@ -48,7 +49,7 @@ import static org.terasology.engine.entitySystem.entity.internal.EntityScope.GLO
 public class EntitySerializerTest {
 
     private static Context context;
-    private static ModuleManagerImpl moduleManager;
+    private static ModuleManager moduleManager;
     private ComponentLibrary componentLibrary;
     private EngineEntityManager entityManager;
     private EntitySerializer entitySerializer;
@@ -61,11 +62,10 @@ public class EntitySerializerTest {
         CoreRegistry.setContext(context);
         context.put(RecordAndReplayCurrentStatus.class, new RecordAndReplayCurrentStatus());
         moduleManager = ModuleManagerFactory.create();
-        context.put(ModuleManagerImpl.class, moduleManager);
+        context.put(ModuleManager.class, moduleManager);
 
-        ModuleAwareAssetTypeManager assetTypeManager = new ModuleAwareAssetTypeManager();
-        assetTypeManager.registerCoreAssetType(Prefab.class,
-                (AssetFactory<Prefab, PrefabData>) PojoPrefab::new, "prefabs");
+        ModuleAwareAssetTypeManager assetTypeManager = new ModuleAwareAssetTypeManagerImpl();
+        assetTypeManager.createAssetType(Prefab.class, PojoPrefab::new, "prefabs");
         assetTypeManager.switchEnvironment(moduleManager.getEnvironment());
         context.put(AssetManager.class, assetTypeManager.getAssetManager());
     }
