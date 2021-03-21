@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.terasology.engine.context.internal.ContextImpl;
 import org.terasology.engine.core.bootstrap.EntitySystemSetupUtil;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.entitySystem.entity.EntityRef;
 import org.terasology.engine.entitySystem.entity.internal.EngineEntityManager;
@@ -29,7 +30,7 @@ import static org.mockito.Mockito.when;
  */
 public class OwnershipHelperTest {
 
-    private static ModuleManagerImpl moduleManager;
+    private static ModuleManager moduleManager;
 
     EngineEntityManager entityManager;
 

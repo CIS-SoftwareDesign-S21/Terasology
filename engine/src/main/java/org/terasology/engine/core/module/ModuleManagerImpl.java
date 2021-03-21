@@ -38,7 +38,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class ModuleManagerImpl {
+public class ModuleManagerImpl implements ModuleManager{
     private static final Logger logger = LoggerFactory.getLogger(ModuleManagerImpl.class);
     private final ModuleFactory moduleFactory;
     private final StandardPermissionProviderFactory permissionProviderFactory = new StandardPermissionProviderFactory();
@@ -132,18 +132,22 @@ public class ModuleManagerImpl {
         System.setSecurityManager(new ModuleSecurityManager());
     }
 
+    @Override
     public ModuleRegistry getRegistry() {
         return registry;
     }
 
+    @Override
     public ModuleInstallManager getInstallManager() {
         return installManager;
     }
 
+    @Override
     public ModuleEnvironment getEnvironment() {
         return environment;
     }
 
+    @Override
     public ModuleEnvironment loadEnvironment(Set<Module> modules, boolean asPrimary) {
         Set<Module> finalModules = Sets.newLinkedHashSet(modules);
         finalModules.addAll(registry.stream().filter((m)-> m.getResources() instanceof ClasspathFileSource).collect(Collectors.toList()));
@@ -161,10 +165,12 @@ public class ModuleManagerImpl {
         return newEnvironment;
     }
 
+    @Override
     public ModuleMetadataJsonAdapter getModuleMetadataReader() {
         return metadataReader;
     }
 
+    @Override
     public ModuleFactory getModuleFactory() {
         return moduleFactory;
     }

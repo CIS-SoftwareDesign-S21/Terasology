@@ -6,7 +6,7 @@ import com.google.common.collect.Lists;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.terasology.assets.AssetFactory;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.gestalt.assets.management.AssetManager;
 import org.terasology.gestalt.assets.module.ModuleAwareAssetTypeManager;
@@ -36,6 +36,7 @@ import org.terasology.engine.recording.RecordAndReplayCurrentStatus;
 import org.terasology.engine.registry.CoreRegistry;
 import org.terasology.engine.testUtil.ModuleManagerFactory;
 import org.terasology.engine.utilities.Assets;
+import org.terasology.gestalt.assets.module.ModuleAwareAssetTypeManagerImpl;
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -63,11 +64,10 @@ public class PojoEntityManagerTest {
     @BeforeAll
     public static void setupClass() throws Exception {
         context = new ContextImpl();
-        ModuleManagerImpl moduleManager = ModuleManagerFactory.create();
-        context.put(ModuleManagerImpl.class, moduleManager);
-        ModuleAwareAssetTypeManager assetTypeManager = new ModuleAwareAssetTypeManager();
-        assetTypeManager.registerCoreAssetType(Prefab.class,
-                (AssetFactory<Prefab, PrefabData>) PojoPrefab::new, "prefabs");
+        ModuleManager moduleManager = ModuleManagerFactory.create();
+        context.put(ModuleManager.class, moduleManager);
+        ModuleAwareAssetTypeManager assetTypeManager = new ModuleAwareAssetTypeManagerImpl();
+        assetTypeManager.createAssetType(Prefab.class, PojoPrefab::new, "prefabs");
         assetTypeManager.switchEnvironment(moduleManager.getEnvironment());
         context.put(AssetManager.class, assetTypeManager.getAssetManager());
         context.put(RecordAndReplayCurrentStatus.class, new RecordAndReplayCurrentStatus());

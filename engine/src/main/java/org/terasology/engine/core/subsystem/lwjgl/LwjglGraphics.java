@@ -158,7 +158,7 @@ public class LwjglGraphics extends BaseLwjglSubsystem {
         }
 
         try {
-            String root = "org/terasology/icons/";
+            String root = "org/terasology/engine/icons/";
             ClassLoader classLoader = getClass().getClassLoader();
 
             BufferedImage icon16 = ImageIO.read(classLoader.getResourceAsStream(root + "gooey_sweet_16.png"));

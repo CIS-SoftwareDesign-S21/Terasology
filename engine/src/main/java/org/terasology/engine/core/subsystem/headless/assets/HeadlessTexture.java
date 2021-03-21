@@ -36,11 +36,16 @@ public class HeadlessTexture extends Texture {
     private int id;
     private final DisposalAction disposalAction;
 
-    public HeadlessTexture(ResourceUrn urn, AssetType<?, TextureData> assetType, TextureData data, HeadlessTexture.DisposalAction disposalAction) {
-        super(urn, assetType, disposalAction);
-        this.disposalAction = disposalAction;
+    public HeadlessTexture(ResourceUrn urn, AssetType<?, TextureData> assetType, TextureData data,
+                           DisposalAction disposableResource) {
+        super(urn, assetType, disposableResource);
+        disposalAction = disposableResource;
         reload(data);
         id = ID_COUNTER.getAndIncrement();
+    }
+
+    public static HeadlessTexture create(ResourceUrn urn, AssetType<?, TextureData> assetType, TextureData data) {
+        return new HeadlessTexture(urn, assetType, data, new DisposalAction());
     }
 
     @Override

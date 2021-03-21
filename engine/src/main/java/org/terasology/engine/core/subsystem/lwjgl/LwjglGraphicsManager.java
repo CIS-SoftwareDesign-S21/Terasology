@@ -102,10 +102,7 @@ public class LwjglGraphicsManager implements LwjglGraphicsProcessing {
                         return path.getPath().get(1).equals("fonts");
                     }
                 }));
-        assetTypeManager.createAssetType(Shader.class,
-                (urn, assetType, data) ->
-                        new GLSLShader(urn, assetType, data, this, new GLSLShader.DisposalAction(urn, this)),
-                "shaders");
+        assetTypeManager.createAssetType(Shader.class, GLSLShader::create, "shaders");
         assetTypeManager.createAssetType(Material.class, (urn, assetType, data) ->
                         new GLSLMaterial(urn, assetType, data, this, new GLSLMaterial.DisposalAction(urn, this)),
                 "materials");
