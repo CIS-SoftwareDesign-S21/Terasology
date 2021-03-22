@@ -72,6 +72,11 @@ public class GLSLMaterial extends BaseMaterial {
         });
     }
 
+    public static GLSLMaterial create(ResourceUrn urn, LwjglGraphicsProcessing graphicsProcessing, AssetType<?, MaterialData> assetType, MaterialData data) {
+        return new GLSLMaterial(urn, assetType, data, graphicsProcessing, new DisposalAction(urn, graphicsProcessing));
+    }
+
+
     @Override
     public void enable() {
         if (shaderManager.getActiveMaterial() != this || activeFeaturesChanged) {

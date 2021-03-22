@@ -66,6 +66,12 @@ public class OpenGLSkeletalMesh extends SkeletalMesh {
         });
     }
 
+    public static OpenGLSkeletalMesh create(ResourceUrn urn, AssetType<?, SkeletalMeshData> assetType,
+                                            SkeletalMeshData data, LwjglGraphicsProcessing graphicsProcessing,GLBufferPool bufferPool) {
+        return new OpenGLSkeletalMesh(urn, assetType, bufferPool, data, graphicsProcessing, new DisposalAction(urn, bufferPool));
+    }
+
+
     public void setScaleTranslate(org.joml.Vector3f newScale, org.joml.Vector3f newTranslate) {
         this.scale = newScale;
         this.translate = newTranslate;

@@ -89,6 +89,8 @@ public final class ExternalApiWhitelist {
             .add("org.terasology.jnlua")
             .add("org.joml")
             .add("org.terasology.input")
+            .add("org.terasology.input.device")
+            .add("org.terasology")
             .build();
 
     public static final Set<Class<?>> CLASSES = new ImmutableSet.Builder<Class<?>>()

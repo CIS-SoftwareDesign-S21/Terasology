@@ -25,25 +25,18 @@ import org.terasology.engine.core.subsystem.DisplayDeviceInfo;
 import org.terasology.engine.core.subsystem.RenderingSubsystemFactory;
 import org.terasology.engine.rendering.assets.animation.MeshAnimation;
 import org.terasology.engine.rendering.assets.animation.MeshAnimationBundle;
-import org.terasology.engine.rendering.assets.animation.MeshAnimationBundleData;
 import org.terasology.engine.rendering.assets.animation.MeshAnimationImpl;
 import org.terasology.engine.rendering.assets.atlas.Atlas;
 import org.terasology.engine.rendering.assets.font.Font;
-import org.terasology.engine.rendering.assets.font.FontData;
 import org.terasology.engine.rendering.assets.font.FontImpl;
 import org.terasology.engine.rendering.assets.material.Material;
-import org.terasology.engine.rendering.assets.material.MaterialData;
 import org.terasology.engine.rendering.assets.mesh.Mesh;
-import org.terasology.engine.rendering.assets.mesh.MeshData;
 import org.terasology.engine.rendering.assets.shader.Shader;
-import org.terasology.engine.rendering.assets.shader.ShaderData;
 import org.terasology.engine.rendering.assets.skeletalmesh.SkeletalMesh;
-import org.terasology.engine.rendering.assets.skeletalmesh.SkeletalMeshData;
 import org.terasology.engine.rendering.assets.texture.PNGTextureFormat;
 import org.terasology.engine.rendering.assets.texture.Texture;
 import org.terasology.engine.rendering.assets.texture.TextureData;
 import org.terasology.engine.rendering.assets.texture.subtexture.Subtexture;
-import org.terasology.engine.rendering.assets.texture.subtexture.SubtextureData;
 import org.terasology.engine.rendering.opengl.GLSLMaterial;
 import org.terasology.engine.rendering.opengl.GLSLShader;
 import org.terasology.engine.rendering.opengl.OpenGLMesh;
@@ -84,7 +77,7 @@ public class LwjglGraphicsManager implements LwjglGraphicsProcessing {
         assetTypeManager.createAssetType(Font.class,
                 FontImpl::new, "fonts");
         AssetType<Texture, TextureData> texture = assetTypeManager.createAssetType(Texture.class,
-                (urn, assetType, data) -> (new OpenGLTexture(urn, assetType, data, this)), "textures", "fonts");
+                (urn, assetType, data) -> (OpenGLTexture.create(urn, assetType, data, this)), "textures", "fonts");
 
         assetTypeManager.getAssetFileDataProducer(texture).addAssetFormat(
                 new PNGTextureFormat(Texture.FilterMode.NEAREST, path -> {
@@ -104,15 +97,13 @@ public class LwjglGraphicsManager implements LwjglGraphicsProcessing {
                 }));
         assetTypeManager.createAssetType(Shader.class, GLSLShader::create, "shaders");
         assetTypeManager.createAssetType(Material.class, (urn, assetType, data) ->
-                        new GLSLMaterial(urn, assetType, data, this, new GLSLMaterial.DisposalAction(urn, this)),
+                        GLSLMaterial.create(urn, this, assetType, data),
                 "materials");
-        assetTypeManager.createAssetType(Mesh.class,
-                (urn, assetType, data) ->
-                        new OpenGLMesh(urn, assetType, bufferPool, data, this),
+        assetTypeManager.createAssetType(Mesh.class, (urn, assetType, data) -> OpenGLMesh.create(urn, assetType, bufferPool, data, this),
                 "mesh");
         assetTypeManager.createAssetType(SkeletalMesh.class,
                 (urn, assetType, data) ->
-                        new OpenGLSkeletalMesh(urn, assetType, bufferPool, data, this, new OpenGLSkeletalMesh.DisposalAction(urn, bufferPool)),
+                         OpenGLSkeletalMesh.create(urn, assetType, data, this, bufferPool),
                 "skeletalMesh");
         assetTypeManager.createAssetType(MeshAnimation.class, MeshAnimationImpl::new,
                 "animations", "skeletalMesh");
@@ -120,7 +111,7 @@ public class LwjglGraphicsManager implements LwjglGraphicsProcessing {
         assetTypeManager.createAssetType(MeshAnimationBundle.class, MeshAnimationBundle::new,
                 "skeletalMesh", "animations");
         assetTypeManager.createAssetType(Subtexture.class, Subtexture::new);
-    }
+    }{}
 
     public void registerRenderingSubsystem(Context context) {
         context.put(RenderingSubsystemFactory.class, new LwjglRenderingSubsystemFactory(bufferPool));

@@ -128,22 +128,22 @@ public class HeadlessTexture extends Texture {
     }
 
     @Override
-    public synchronized void subscribeToDisposal(Runnable subscriber) {
+    public synchronized void subscribeToDisposal(DisposableResource subscriber) {
         disposalAction.disposalListeners.add(subscriber);
     }
 
     @Override
-    public synchronized void unsubscribeToDisposal(Runnable subscriber) {
+    public synchronized void unsubscribeToDisposal(DisposableResource subscriber) {
         disposalAction.disposalListeners.remove(subscriber);
     }
 
     public static class DisposalAction implements DisposableResource {
 
-        private final List<Runnable> disposalListeners = Lists.newArrayList();
+        private final List<DisposableResource> disposalListeners = Lists.newArrayList();
 
         @Override
         public void close() {
-            disposalListeners.forEach(java.lang.Runnable::run);
+            disposalListeners.forEach(DisposableResource::close);
         }
     }
 }
