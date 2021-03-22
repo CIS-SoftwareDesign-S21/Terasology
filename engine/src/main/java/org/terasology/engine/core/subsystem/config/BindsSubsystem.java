@@ -150,16 +150,14 @@ public class BindsSubsystem implements EngineSubsystem, BindsManager {
         ModuleManagerImpl moduleManager = passedContext.get(ModuleManagerImpl.class);
         DependencyResolver resolver = new DependencyResolver(moduleManager.getRegistry());
         for (Name moduleId : moduleManager.getRegistry().getModuleIds()) {
-            if (moduleManager.getRegistry().getLatestModuleVersion(moduleId).getResources() instanceof DirectoryFileSource) {
-                ResolutionResult result = resolver.resolve(moduleId);
-                if (result.isSuccess()) {
-                    try (ModuleEnvironment environment = moduleManager.loadEnvironment(result.getModules(), false)) {
-                        FromModule filter = new FromModule(environment, moduleId);
-                        Iterable<Class<?>> buttons = environment.getTypesAnnotatedWith(RegisterBindButton.class, filter);
-                        Iterable<Class<?>> axes = environment.getTypesAnnotatedWith(RegisterRealBindAxis.class, filter);
-                        addButtonDefaultsFor(moduleId, buttons, config);
-                        addAxisDefaultsFor(moduleId, axes, config);
-                    }
+            ResolutionResult result = resolver.resolve(moduleId);
+            if (result.isSuccess()) {
+                try (ModuleEnvironment environment = moduleManager.loadEnvironment(result.getModules(), false)) {
+                    FromModule filter = new FromModule(environment, moduleId);
+                    Iterable<Class<?>> buttons = environment.getTypesAnnotatedWith(RegisterBindButton.class, filter);
+                    Iterable<Class<?>> axes = environment.getTypesAnnotatedWith(RegisterRealBindAxis.class, filter);
+                    addButtonDefaultsFor(moduleId, buttons, config);
+                    addAxisDefaultsFor(moduleId, axes, config);
                 }
             }
         }
