@@ -16,12 +16,12 @@
 package org.terasology.engine.core.module;
 
 import org.terasology.engine.core.TerasologyConstants;
+import org.terasology.gestalt.module.Module;
 import org.terasology.gestalt.module.ModuleRegistry;
 import org.terasology.gestalt.module.dependencyresolution.DependencyResolver;
 import org.terasology.gestalt.module.dependencyresolution.ResolutionResult;
 import org.terasology.gestalt.module.resources.DirectoryFileSource;
 import org.terasology.gestalt.naming.Name;
-import org.terasology.gestalt.module.Module;
 import org.terasology.gestalt.naming.Version;
 
 import java.util.Set;

@@ -4,8 +4,6 @@ package org.terasology.engine.core.bootstrap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.terasology.gestalt.assets.ResourceUrn;
-import org.terasology.gestalt.assets.module.ModuleAwareAssetTypeManager;
 import org.terasology.engine.config.flexible.AutoConfigManager;
 import org.terasology.engine.context.Context;
 import org.terasology.engine.core.module.ModuleManagerImpl;
@@ -26,6 +24,8 @@ import org.terasology.engine.physics.CollisionGroup;
 import org.terasology.engine.physics.CollisionGroupManager;
 import org.terasology.engine.registry.InjectionHelper;
 import org.terasology.engine.utilities.ReflectionUtil;
+import org.terasology.gestalt.assets.ResourceUrn;
+import org.terasology.gestalt.assets.module.ModuleAwareAssetTypeManager;
 import org.terasology.gestalt.module.ModuleEnvironment;
 import org.terasology.gestalt.naming.Name;
 import org.terasology.gestalt.util.reflection.GenericsUtil;

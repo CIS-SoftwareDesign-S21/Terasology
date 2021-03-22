@@ -22,7 +22,6 @@ import org.terasology.engine.TerasologyTestingEnvironment;
 import org.terasology.engine.core.ComponentSystemManager;
 import org.terasology.engine.core.EngineTime;
 import org.terasology.engine.core.bootstrap.EntitySystemSetupUtil;
-import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.entitySystem.entity.EntityBuilder;
 import org.terasology.engine.entitySystem.entity.EntityManager;
@@ -54,8 +53,8 @@ public class NetworkOwnershipTest extends TerasologyTestingEnvironment {
     @BeforeEach
     public void setup() throws Exception {
         super.setup();
-        ModuleManager moduleManager = ModuleManagerFactory.create();
-        context.put(ModuleManager.class, moduleManager);
+        ModuleManagerImpl moduleManager = ModuleManagerFactory.create();
+        context.put(ModuleManagerImpl.class, moduleManager);
         EngineTime mockTime = mock(EngineTime.class);
         networkSystem = new NetworkSystemImpl(mockTime, context);
         networkSystem.setContext(context);

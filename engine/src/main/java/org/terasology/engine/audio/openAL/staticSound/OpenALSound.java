@@ -18,14 +18,14 @@ package org.terasology.engine.audio.openAL.staticSound;
 import org.lwjgl.openal.AL10;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.terasology.gestalt.assets.AssetType;
-import org.terasology.gestalt.assets.DisposableResource;
-import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.engine.audio.StaticSound;
 import org.terasology.engine.audio.StaticSoundData;
 import org.terasology.engine.audio.openAL.OpenALException;
 import org.terasology.engine.audio.openAL.OpenALManager;
 import org.terasology.engine.core.GameThread;
+import org.terasology.gestalt.assets.AssetType;
+import org.terasology.gestalt.assets.DisposableResource;
+import org.terasology.gestalt.assets.ResourceUrn;
 
 import java.lang.ref.WeakReference;
 

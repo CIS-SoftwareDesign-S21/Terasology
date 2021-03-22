@@ -34,7 +34,7 @@ class RecordedEventSerializer {
     private static final Logger logger = LoggerFactory.getLogger(RecordedEventSerializer.class);
     private final Serializer<?> serializer;
 
-    public RecordedEventSerializer(EntityManager entityManager, ModuleManagerImpl moduleManager, TypeRegistry typeRegistry) {
+    public RecordedEventSerializer(EntityManager entityManager,  ModuleManagerImpl moduleManager, TypeRegistry typeRegistry) {
         TypeHandlerLibrary typeHandlerLibrary = TypeHandlerLibraryImpl.forModuleEnvironment(moduleManager, typeRegistry);
         typeHandlerLibrary.addTypeHandler(EntityRef.class, new EntityRefTypeHandler((EngineEntityManager) entityManager));
         Gson gson = new Gson();

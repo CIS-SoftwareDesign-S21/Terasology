@@ -17,7 +17,6 @@ package org.terasology.engine.core.module;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.terasology.engine.core.TerasologyConstants;
 import org.terasology.engine.core.paths.PathManager;
 import org.terasology.engine.utilities.download.MultiFileDownloader;
 import org.terasology.engine.utilities.download.MultiFileTransferProgressListener;

@@ -6,6 +6,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import org.joml.Vector2i;
+import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.engine.config.BindsConfig;
 import org.terasology.engine.config.ControllerConfig.ControllerInfo;

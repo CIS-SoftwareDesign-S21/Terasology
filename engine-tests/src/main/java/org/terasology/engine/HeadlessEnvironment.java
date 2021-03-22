@@ -4,12 +4,6 @@ package org.terasology.engine;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.terasology.engine.core.module.ModuleManager;
-import org.terasology.engine.rendering.assets.texture.TextureData;
-import org.terasology.engine.world.block.loader.BlockFamilyDefinitionData;
-import org.terasology.gestalt.assets.AssetType;
-import org.terasology.gestalt.assets.management.AssetManager;
-import org.terasology.gestalt.assets.module.ModuleAwareAssetTypeManager;
 import org.terasology.engine.audio.AudioManager;
 import org.terasology.engine.audio.StaticSound;
 import org.terasology.engine.audio.StreamingSound;
@@ -58,6 +52,7 @@ import org.terasology.engine.rendering.assets.shader.Shader;
 import org.terasology.engine.rendering.assets.skeletalmesh.SkeletalMesh;
 import org.terasology.engine.rendering.assets.texture.PNGTextureFormat;
 import org.terasology.engine.rendering.assets.texture.Texture;
+import org.terasology.engine.rendering.assets.texture.TextureData;
 import org.terasology.engine.rendering.assets.texture.subtexture.Subtexture;
 import org.terasology.engine.testUtil.ModuleManagerFactory;
 import org.terasology.engine.world.WorldProvider;
@@ -67,6 +62,7 @@ import org.terasology.engine.world.block.family.BlockFamily;
 import org.terasology.engine.world.block.family.BlockFamilyLibrary;
 import org.terasology.engine.world.block.internal.BlockManagerImpl;
 import org.terasology.engine.world.block.loader.BlockFamilyDefinition;
+import org.terasology.engine.world.block.loader.BlockFamilyDefinitionData;
 import org.terasology.engine.world.block.loader.BlockFamilyDefinitionFormat;
 import org.terasology.engine.world.block.shapes.BlockShape;
 import org.terasology.engine.world.block.shapes.BlockShapeImpl;
@@ -81,10 +77,13 @@ import org.terasology.engine.world.sun.CelestialSystem;
 import org.terasology.engine.world.sun.DefaultCelestialSystem;
 import org.terasology.engine.world.time.WorldTime;
 import org.terasology.engine.world.time.WorldTimeImpl;
+import org.terasology.gestalt.assets.AssetType;
+import org.terasology.gestalt.assets.management.AssetManager;
+import org.terasology.gestalt.assets.module.ModuleAwareAssetTypeManager;
 import org.terasology.gestalt.assets.module.ModuleAwareAssetTypeManagerImpl;
+import org.terasology.gestalt.module.ModuleEnvironment;
 import org.terasology.gestalt.module.ModuleRegistry;
 import org.terasology.gestalt.module.dependencyresolution.DependencyResolver;
-import org.terasology.gestalt.module.ModuleEnvironment;
 import org.terasology.gestalt.module.dependencyresolution.ResolutionResult;
 import org.terasology.gestalt.naming.Name;
 import org.terasology.nui.asset.UIElement;
@@ -241,7 +240,7 @@ public class HeadlessEnvironment extends Environment {
         assetTypeManager.createAssetType(Subtexture.class,
                 Subtexture::new);
 
-        assetTypeManager.switchEnvironment(context.get(ModuleManager.class).getEnvironment());
+        assetTypeManager.switchEnvironment(context.get(ModuleManagerImpl.class).getEnvironment());
 
         context.put(ModuleAwareAssetTypeManager.class, assetTypeManager);
         context.put(AssetManager.class, assetTypeManager.getAssetManager());
@@ -267,7 +266,7 @@ public class HeadlessEnvironment extends Environment {
         TypeRegistry.WHITELISTED_CLASSES = ExternalApiWhitelist.CLASSES.stream().map(Class::getName).collect(Collectors.toSet());
         context.put(TypeRegistry.class, typeRegistry);
 
-        ModuleManager moduleManager = ModuleManagerFactory.create();
+        ModuleManagerImpl moduleManager = ModuleManagerFactory.create();
         ModuleRegistry registry = moduleManager.getRegistry();
 
         DependencyResolver resolver = new DependencyResolver(registry);
@@ -281,7 +280,7 @@ public class HeadlessEnvironment extends Environment {
             logger.error("Could not resolve module dependencies for " + moduleNames);
         }
 
-        context.put(ModuleManager.class, moduleManager);
+        context.put(ModuleManagerImpl.class, moduleManager);
 
         EntitySystemSetupUtil.addReflectionBasedLibraries(context);
     }

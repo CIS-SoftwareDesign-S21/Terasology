@@ -22,7 +22,6 @@ import org.slf4j.LoggerFactory;
 import org.terasology.persistence.typeHandling.SpecificTypeHandlerFactory;
 import org.terasology.persistence.typeHandling.StringRepresentationTypeHandler;
 import org.terasology.reflection.MappedContainer;
-import org.terasology.reflection.metadata.FieldMetadata;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Set;

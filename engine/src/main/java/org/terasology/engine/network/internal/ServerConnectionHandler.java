@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 package org.terasology.engine.network.internal;
 
-import com.google.common.io.ByteStreams;
 import com.google.protobuf.ByteString;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -10,20 +9,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.identity.PublicIdentityCertificate;
+import org.terasology.engine.registry.CoreRegistry;
+import org.terasology.engine.rendering.world.viewDistance.ViewDistance;
 import org.terasology.gestalt.module.Module;
 import org.terasology.gestalt.module.resources.ArchiveFileSource;
 import org.terasology.gestalt.module.resources.FileReference;
 import org.terasology.gestalt.naming.Name;
 import org.terasology.nui.Color;
 import org.terasology.protobuf.NetData;
-import org.terasology.engine.registry.CoreRegistry;
-import org.terasology.engine.rendering.world.viewDistance.ViewDistance;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 
 /**
@@ -78,12 +74,12 @@ public class ServerConnectionHandler extends ChannelInboundHandlerAdapter {
             result.setId(request.getModuleId());
             Module module = moduleManager.getEnvironment().get(new Name(request.getModuleId()));
 
-            if (!(module.getResources() instanceof ArchiveFileSource) ) { //TODO: gestaltv7 restore module downloading for maximum possibles
+            if (!(module.getResources() instanceof ArchiveFileSource)) { //TODO: gestaltv7 restore module downloading for maximum possibles
                 result.setError("Module not available for download");
             } else {
                 FileReference fileReference = module.getResources().getFiles().iterator().next();
                 try (InputStream stream = fileReference.open()) {
-                    ByteString byteString = ByteString.readFrom(stream,1024);
+                    ByteString byteString = ByteString.readFrom(stream, 1024);
                     channelHandlerContext.channel().write(
                             NetData.NetMessage.newBuilder().setModuleData(
                                     NetData.ModuleData.newBuilder().setModule(byteString)
@@ -110,5 +106,4 @@ public class ServerConnectionHandler extends ChannelInboundHandlerAdapter {
         channelHandlerContext.pipeline().remove(this);
         serverHandler.connectionComplete(client);
     }
-
 }

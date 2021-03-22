@@ -15,11 +15,11 @@
  */
 package org.terasology.engine.audio.nullAudio;
 
+import org.terasology.engine.audio.StaticSound;
+import org.terasology.engine.audio.StaticSoundData;
 import org.terasology.gestalt.assets.Asset;
 import org.terasology.gestalt.assets.AssetType;
 import org.terasology.gestalt.assets.ResourceUrn;
-import org.terasology.engine.audio.StaticSound;
-import org.terasology.engine.audio.StaticSoundData;
 
 import java.util.Optional;
 

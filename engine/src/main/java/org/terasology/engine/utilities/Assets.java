@@ -5,6 +5,7 @@ package org.terasology.engine.utilities;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
+import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.gestalt.assets.Asset;
 import org.terasology.gestalt.assets.AssetData;
 import org.terasology.gestalt.assets.ResourceUrn;

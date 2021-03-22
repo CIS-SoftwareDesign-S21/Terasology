@@ -3,6 +3,15 @@
 
 package org.terasology.engine.i18n.assets;
 
+import com.google.common.base.Objects;
+import com.google.common.base.Preconditions;
+import org.terasology.engine.core.Uri;
+import org.terasology.gestalt.assets.Asset;
+import org.terasology.gestalt.assets.AssetType;
+import org.terasology.gestalt.assets.DisposableResource;
+import org.terasology.gestalt.assets.ResourceUrn;
+import org.terasology.gestalt.naming.Name;
+
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.List;
@@ -10,16 +19,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
-
-import org.terasology.gestalt.assets.Asset;
-import org.terasology.gestalt.assets.AssetType;
-import org.terasology.gestalt.assets.DisposableResource;
-import org.terasology.gestalt.assets.ResourceUrn;
-import org.terasology.engine.core.Uri;
-import org.terasology.gestalt.naming.Name;
-
-import com.google.common.base.Objects;
-import com.google.common.base.Preconditions;
 
 /**
  * Defines a translation asset.

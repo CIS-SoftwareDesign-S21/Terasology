@@ -6,7 +6,7 @@ import com.google.common.collect.Lists;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.terasology.engine.core.module.ModuleManager;
+import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.gestalt.assets.management.AssetManager;
 import org.terasology.gestalt.assets.module.ModuleAwareAssetTypeManager;
@@ -64,8 +64,8 @@ public class PojoEntityManagerTest {
     @BeforeAll
     public static void setupClass() throws Exception {
         context = new ContextImpl();
-        ModuleManager moduleManager = ModuleManagerFactory.create();
-        context.put(ModuleManager.class, moduleManager);
+        ModuleManagerImpl moduleManager = ModuleManagerFactory.create();
+        context.put(ModuleManagerImpl.class, moduleManager);
         ModuleAwareAssetTypeManager assetTypeManager = new ModuleAwareAssetTypeManagerImpl();
         assetTypeManager.createAssetType(Prefab.class, PojoPrefab::new, "prefabs");
         assetTypeManager.switchEnvironment(moduleManager.getEnvironment());

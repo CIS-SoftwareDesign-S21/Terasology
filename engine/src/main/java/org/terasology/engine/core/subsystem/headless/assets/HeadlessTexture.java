@@ -17,13 +17,13 @@ package org.terasology.engine.core.subsystem.headless.assets;
 
 import com.google.common.collect.Lists;
 import org.joml.Vector2i;
+import org.terasology.engine.rendering.assets.texture.Texture;
+import org.terasology.engine.rendering.assets.texture.TextureData;
 import org.terasology.gestalt.assets.AssetType;
 import org.terasology.gestalt.assets.DisposableResource;
 import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.joml.geom.Rectanglef;
 import org.terasology.joml.geom.Rectanglei;
-import org.terasology.engine.rendering.assets.texture.Texture;
-import org.terasology.engine.rendering.assets.texture.TextureData;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;

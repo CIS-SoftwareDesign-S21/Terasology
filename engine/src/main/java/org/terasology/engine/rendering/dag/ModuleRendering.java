@@ -24,7 +24,7 @@ public abstract class ModuleRendering {
 
     // @In
     protected Context context;
-    protected ModuleManagerImpl moduleManager;
+    protected  ModuleManagerImpl moduleManager;
     protected Name providingModule;
     protected RenderGraph renderGraph;
     protected WorldRenderer worldRenderer;
@@ -36,7 +36,7 @@ public abstract class ModuleRendering {
 
     public ModuleRendering(Context context) {
         this.context = context;
-        moduleManager = context.get(ModuleManagerImpl.class);
+        moduleManager = context.get( ModuleManagerImpl.class);
         providingModule = moduleManager.getEnvironment().getModuleProviding(this.getClass());
     }
 

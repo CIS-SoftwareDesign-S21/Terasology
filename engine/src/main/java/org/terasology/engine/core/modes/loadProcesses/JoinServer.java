@@ -28,13 +28,13 @@ import org.terasology.engine.core.modes.VariableStepLoadProcess;
 import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.game.Game;
 import org.terasology.engine.game.GameManifest;
-import org.terasology.gestalt.module.Module;
-import org.terasology.gestalt.module.ModuleEnvironment;
 import org.terasology.engine.network.JoinStatus;
 import org.terasology.engine.network.NetworkSystem;
 import org.terasology.engine.network.Server;
 import org.terasology.engine.network.ServerInfoMessage;
 import org.terasology.engine.world.internal.WorldInfo;
+import org.terasology.gestalt.module.Module;
+import org.terasology.gestalt.module.ModuleEnvironment;
 import org.terasology.gestalt.naming.NameVersion;
 
 import java.util.Map;

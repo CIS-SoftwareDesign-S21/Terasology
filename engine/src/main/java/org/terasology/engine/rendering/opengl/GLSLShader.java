@@ -366,12 +366,10 @@ public class GLSLShader extends Shader {
         //int validateStatus = ARBShaderObjects.glGetObjectParameteriARB(shaderId, ARBShaderObjects.GL_OBJECT_VALIDATE_STATUS_ARB);
 
 
-        if (compileStatus == 0 /*|| linkStatus == 0 || validateStatus == 0*/) {
-            return false;
-        }
+        /*|| linkStatus == 0 || validateStatus == 0*/
+        return compileStatus != 0;
 
         //logger.info("Shader '{}' successfully compiled.", getURI());
-        return true;
     }
 
     @Override

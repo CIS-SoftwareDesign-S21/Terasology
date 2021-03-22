@@ -6,6 +6,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.engine.context.Context;
 import org.terasology.engine.core.SimpleUri;

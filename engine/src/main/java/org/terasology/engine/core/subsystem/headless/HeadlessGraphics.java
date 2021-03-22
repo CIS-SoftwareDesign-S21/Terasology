@@ -15,8 +15,6 @@
  */
 package org.terasology.engine.core.subsystem.headless;
 
-import org.terasology.gestalt.assets.AssetType;
-import org.terasology.gestalt.assets.module.ModuleAwareAssetTypeManager;
 import org.terasology.engine.context.Context;
 import org.terasology.engine.core.subsystem.DisplayDevice;
 import org.terasology.engine.core.subsystem.EngineSubsystem;
@@ -32,28 +30,20 @@ import org.terasology.engine.core.subsystem.headless.renderer.HeadlessRenderingS
 import org.terasology.engine.core.subsystem.headless.renderer.ShaderManagerHeadless;
 import org.terasology.engine.rendering.ShaderManager;
 import org.terasology.engine.rendering.assets.animation.MeshAnimation;
-import org.terasology.engine.rendering.assets.animation.MeshAnimationBundle;
-import org.terasology.engine.rendering.assets.animation.MeshAnimationBundleData;
-import org.terasology.engine.rendering.assets.animation.MeshAnimationData;
 import org.terasology.engine.rendering.assets.animation.MeshAnimationImpl;
 import org.terasology.engine.rendering.assets.atlas.Atlas;
-import org.terasology.engine.rendering.assets.atlas.AtlasData;
 import org.terasology.engine.rendering.assets.font.Font;
-import org.terasology.engine.rendering.assets.font.FontData;
 import org.terasology.engine.rendering.assets.font.FontImpl;
 import org.terasology.engine.rendering.assets.material.Material;
-import org.terasology.engine.rendering.assets.material.MaterialData;
 import org.terasology.engine.rendering.assets.mesh.Mesh;
-import org.terasology.engine.rendering.assets.mesh.MeshData;
 import org.terasology.engine.rendering.assets.shader.Shader;
-import org.terasology.engine.rendering.assets.shader.ShaderData;
 import org.terasology.engine.rendering.assets.skeletalmesh.SkeletalMesh;
-import org.terasology.engine.rendering.assets.skeletalmesh.SkeletalMeshData;
 import org.terasology.engine.rendering.assets.texture.PNGTextureFormat;
 import org.terasology.engine.rendering.assets.texture.Texture;
 import org.terasology.engine.rendering.assets.texture.TextureData;
 import org.terasology.engine.rendering.assets.texture.subtexture.Subtexture;
-import org.terasology.engine.rendering.assets.texture.subtexture.SubtextureData;
+import org.terasology.gestalt.assets.AssetType;
+import org.terasology.gestalt.assets.module.ModuleAwareAssetTypeManager;
 import org.terasology.nui.canvas.CanvasRenderer;
 
 public class HeadlessGraphics implements EngineSubsystem {

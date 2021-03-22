@@ -15,7 +15,6 @@
  */
 package org.terasology.engine.core.subsystem.headless;
 
-import org.terasology.gestalt.assets.module.ModuleAwareAssetTypeManager;
 import org.terasology.engine.audio.AudioManager;
 import org.terasology.engine.audio.StaticSound;
 import org.terasology.engine.audio.StreamingSound;
@@ -24,6 +23,7 @@ import org.terasology.engine.context.Context;
 import org.terasology.engine.core.GameEngine;
 import org.terasology.engine.core.modes.GameState;
 import org.terasology.engine.core.subsystem.EngineSubsystem;
+import org.terasology.gestalt.assets.module.ModuleAwareAssetTypeManager;
 
 public class HeadlessAudio implements EngineSubsystem {
 

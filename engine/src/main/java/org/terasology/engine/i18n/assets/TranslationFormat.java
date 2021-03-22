@@ -9,9 +9,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonParseException;
-
-import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.engine.core.SimpleUri;
+import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.gestalt.assets.exceptions.InvalidAssetFilenameException;
 import org.terasology.gestalt.assets.format.AssetDataFile;
 import org.terasology.gestalt.assets.format.AssetFileFormat;
@@ -21,7 +20,6 @@ import org.terasology.gestalt.naming.Name;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.file.PathMatcher;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;

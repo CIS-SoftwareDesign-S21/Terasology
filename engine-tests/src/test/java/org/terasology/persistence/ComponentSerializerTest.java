@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.reflections.Reflections;
-import org.terasology.engine.core.module.ModuleManager;
+import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.engine.context.Context;
 import org.terasology.engine.context.internal.ContextImpl;
@@ -42,7 +42,7 @@ import static org.mockito.Mockito.when;
 /**
  */
 public class ComponentSerializerTest {
-    private static ModuleManager moduleManager;
+    private static ModuleManagerImpl moduleManager;
     private ComponentSerializer componentSerializer;
     private Context context;
 
@@ -55,7 +55,7 @@ public class ComponentSerializerTest {
     public void setup() {
         context = new ContextImpl();
         context.put(RecordAndReplayCurrentStatus.class, new RecordAndReplayCurrentStatus());
-        context.put(ModuleManager.class, moduleManager);
+        context.put(ModuleManagerImpl.class, moduleManager);
         CoreRegistry.setContext(context);
 
         Reflections reflections = new Reflections(getClass().getClassLoader());
