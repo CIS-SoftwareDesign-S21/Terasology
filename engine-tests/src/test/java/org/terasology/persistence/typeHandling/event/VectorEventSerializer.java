@@ -11,10 +11,9 @@ import org.joml.Vector4f;
 import org.joml.Vector4fc;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.engine.context.internal.ContextImpl;
-import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.entitySystem.event.Event;
 import org.terasology.engine.entitySystem.metadata.EntitySystemLibrary;
 import org.terasology.engine.entitySystem.metadata.EventMetadata;
@@ -60,8 +59,8 @@ public class VectorEventSerializer {
     public void setup() throws Exception {
         ContextImpl context = new ContextImpl();
         CoreRegistry.setContext(context);
-        ModuleManagerImpl moduleManager = ModuleManagerFactory.create();
-        context.put(ModuleManagerImpl.class, moduleManager);
+        ModuleManager moduleManager = ModuleManagerFactory.create();
+        context.put(ModuleManager.class, moduleManager);
         context.put(ReflectFactory.class, reflectFactory);
         context.put(CopyStrategyLibrary.class, copyStrategies);
 

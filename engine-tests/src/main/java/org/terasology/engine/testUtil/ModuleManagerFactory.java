@@ -3,7 +3,7 @@
 package org.terasology.engine.testUtil;
 
 import com.google.common.collect.Sets;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.gestalt.module.Module;
 import org.terasology.gestalt.naming.Name;
 
@@ -12,8 +12,8 @@ public final class ModuleManagerFactory {
     private ModuleManagerFactory() {
     }
 
-    public static ModuleManagerImpl create() throws Exception {
-        ModuleManagerImpl moduleManager = new ModuleManagerImpl("");
+    public static ModuleManager create() throws Exception {
+        ModuleManager moduleManager = new ModuleManager("");
         Module unittestModule = moduleManager.getModuleFactory().createPackageModule("org.terasology.unittest");
         moduleManager.getRegistry().add(unittestModule);
 

@@ -10,7 +10,7 @@ import org.terasology.engine.config.Config;
 import org.terasology.engine.context.Context;
 import org.terasology.engine.context.internal.ContextImpl;
 import org.terasology.engine.core.bootstrap.EnvironmentSwitchHandler;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.entitySystem.prefab.Prefab;
 import org.terasology.engine.entitySystem.prefab.internal.PojoPrefab;
 import org.terasology.engine.logic.behavior.asset.BehaviorTree;
@@ -74,7 +74,7 @@ public class UniverseSetupScreen extends CoreScreenLayer {
     private WorldGeneratorManager worldGeneratorManager;
 
     @In
-    private ModuleManagerImpl moduleManager;
+    private ModuleManager moduleManager;
 
     @In
     private Config config;
@@ -320,7 +320,7 @@ public class UniverseSetupScreen extends CoreScreenLayer {
         assetTypeManager = new AutoReloadAssetTypeManager();
         context.put(AssetManager.class, assetTypeManager.getAssetManager());
         context.put(ModuleAwareAssetTypeManager.class, assetTypeManager);
-        context.put(ModuleManagerImpl.class, moduleManager);
+        context.put(ModuleManager.class, moduleManager);
         context.put(UniverseWrapper.class, wrapper);
 
         DependencyResolver resolver = new DependencyResolver(moduleManager.getRegistry());
@@ -357,7 +357,7 @@ public class UniverseSetupScreen extends CoreScreenLayer {
 
     private void initAssets() {
 
-        ModuleEnvironment environment = context.get(ModuleManagerImpl.class).getEnvironment();
+        ModuleEnvironment environment = context.get(ModuleManager.class).getEnvironment();
         BlockFamilyLibrary library =  new BlockFamilyLibrary(environment, context);
 
         // cast lambdas explicitly to avoid inconsistent compiler behavior wrt. type inference

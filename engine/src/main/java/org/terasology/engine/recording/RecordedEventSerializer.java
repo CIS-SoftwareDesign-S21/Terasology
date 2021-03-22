@@ -5,7 +5,7 @@ package org.terasology.engine.recording;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.entitySystem.entity.EntityManager;
 import org.terasology.engine.entitySystem.entity.EntityRef;
 import org.terasology.engine.entitySystem.entity.internal.EngineEntityManager;
@@ -34,7 +34,7 @@ class RecordedEventSerializer {
     private static final Logger logger = LoggerFactory.getLogger(RecordedEventSerializer.class);
     private final Serializer<?> serializer;
 
-    public RecordedEventSerializer(EntityManager entityManager,  ModuleManagerImpl moduleManager, TypeRegistry typeRegistry) {
+    public RecordedEventSerializer(EntityManager entityManager, ModuleManager moduleManager, TypeRegistry typeRegistry) {
         TypeHandlerLibrary typeHandlerLibrary = TypeHandlerLibraryImpl.forModuleEnvironment(moduleManager, typeRegistry);
         typeHandlerLibrary.addTypeHandler(EntityRef.class, new EntityRefTypeHandler((EngineEntityManager) entityManager));
         Gson gson = new Gson();

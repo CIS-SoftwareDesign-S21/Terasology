@@ -18,7 +18,7 @@ import org.terasology.engine.core.Time;
 import org.terasology.engine.core.bootstrap.EntitySystemSetupUtil;
 import org.terasology.engine.core.modes.loadProcesses.LoadPrefabs;
 import org.terasology.engine.core.module.ExternalApiWhitelist;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.core.paths.PathManager;
 import org.terasology.engine.core.subsystem.headless.assets.HeadlessMaterial;
 import org.terasology.engine.core.subsystem.headless.assets.HeadlessMesh;
@@ -121,7 +121,7 @@ public class HeadlessEnvironment extends Environment {
 
     @Override
     protected void setupStorageManager() throws IOException {
-        ModuleManagerImpl moduleManager = context.get(ModuleManagerImpl.class);
+        ModuleManager moduleManager = context.get(ModuleManager.class);
         EngineEntityManager engineEntityManager = context.get(EngineEntityManager.class);
         BlockManager blockManager = context.get(BlockManager.class);
         RecordAndReplaySerializer recordAndReplaySerializer = context.get(RecordAndReplaySerializer.class);
@@ -129,7 +129,7 @@ public class HeadlessEnvironment extends Environment {
         RecordAndReplayUtils recordAndReplayUtils = new RecordAndReplayUtils();
         RecordAndReplayCurrentStatus recordAndReplayCurrentStatus = context.get(RecordAndReplayCurrentStatus.class);
 
-        ModuleEnvironment environment = context.get(ModuleManagerImpl.class).getEnvironment();
+        ModuleEnvironment environment = context.get(ModuleManager.class).getEnvironment();
         context.put(BlockFamilyLibrary.class, new BlockFamilyLibrary(environment,context));
 
         ExtraBlockDataManager extraDataManager = context.get(ExtraBlockDataManager.class);
@@ -176,7 +176,7 @@ public class HeadlessEnvironment extends Environment {
     @Override
     protected AssetManager setupEmptyAssetManager() {
         ModuleAwareAssetTypeManager assetTypeManager = new ModuleAwareAssetTypeManagerImpl();
-        assetTypeManager.switchEnvironment(context.get(ModuleManagerImpl.class).getEnvironment());
+        assetTypeManager.switchEnvironment(context.get(ModuleManager.class).getEnvironment());
 
         context.put(ModuleAwareAssetTypeManager.class, assetTypeManager);
         context.put(AssetManager.class, assetTypeManager.getAssetManager());
@@ -240,7 +240,7 @@ public class HeadlessEnvironment extends Environment {
         assetTypeManager.createAssetType(Subtexture.class,
                 Subtexture::new);
 
-        assetTypeManager.switchEnvironment(context.get(ModuleManagerImpl.class).getEnvironment());
+        assetTypeManager.switchEnvironment(context.get(ModuleManager.class).getEnvironment());
 
         context.put(ModuleAwareAssetTypeManager.class, assetTypeManager);
         context.put(AssetManager.class, assetTypeManager.getAssetManager());
@@ -266,7 +266,7 @@ public class HeadlessEnvironment extends Environment {
         TypeRegistry.WHITELISTED_CLASSES = ExternalApiWhitelist.CLASSES.stream().map(Class::getName).collect(Collectors.toSet());
         context.put(TypeRegistry.class, typeRegistry);
 
-        ModuleManagerImpl moduleManager = ModuleManagerFactory.create();
+        ModuleManager moduleManager = ModuleManagerFactory.create();
         ModuleRegistry registry = moduleManager.getRegistry();
 
         DependencyResolver resolver = new DependencyResolver(registry);
@@ -280,7 +280,7 @@ public class HeadlessEnvironment extends Environment {
             logger.error("Could not resolve module dependencies for " + moduleNames);
         }
 
-        context.put(ModuleManagerImpl.class, moduleManager);
+        context.put(ModuleManager.class, moduleManager);
 
         EntitySystemSetupUtil.addReflectionBasedLibraries(context);
     }

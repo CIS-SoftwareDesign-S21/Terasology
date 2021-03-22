@@ -18,7 +18,7 @@ package org.terasology.engine.particles.updating;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.entitySystem.Component;
 import org.terasology.engine.entitySystem.entity.EntityRef;
 import org.terasology.engine.particles.components.ParticleEmitterComponent;
@@ -45,7 +45,7 @@ public class ParticleUpdaterImplTest {
     @BeforeEach
     public void setUp() throws Exception {
         Physics physics = mock(PhysicsEngine.class);
-        ModuleManagerImpl moduleManager = mock(ModuleManagerImpl.class);
+        ModuleManager moduleManager = mock(ModuleManager.class);
         particleUpdater = new ParticleUpdaterImpl(physics, moduleManager);
     }
 

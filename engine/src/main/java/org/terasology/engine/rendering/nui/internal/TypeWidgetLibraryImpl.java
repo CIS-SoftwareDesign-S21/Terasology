@@ -6,7 +6,7 @@ import com.google.common.collect.Lists;
 import com.google.common.primitives.Primitives;
 import org.terasology.engine.context.Context;
 import org.terasology.engine.core.module.ModuleContext;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.gestalt.module.Module;
 import org.terasology.nui.UIWidget;
 import org.terasology.nui.databinding.Binding;
@@ -67,7 +67,7 @@ public class TypeWidgetLibraryImpl implements TypeWidgetLibrary {
                 return getWidget(binding, baseType);
             }
 
-            ModuleManagerImpl moduleManager = context.get(ModuleManagerImpl.class);
+            ModuleManager moduleManager = context.get(ModuleManager.class);
             TypeRegistry typeRegistry = context.get(TypeRegistry.class);
 
             SubtypeLayoutBuilder<T> builder = new SubtypeLayoutBuilder<>(

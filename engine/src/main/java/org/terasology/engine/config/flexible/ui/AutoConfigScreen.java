@@ -8,7 +8,7 @@ import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.gestalt.assets.management.AssetManager;
 import org.terasology.engine.config.flexible.AutoConfig;
 import org.terasology.engine.config.flexible.AutoConfigManager;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.nui.UIWidget;
 import org.terasology.nui.WidgetUtil;
 import org.terasology.nui.databinding.Binding;
@@ -27,7 +27,7 @@ public class AutoConfigScreen extends CoreScreenLayer {
     @In
     private TypeWidgetLibrary typeWidgetLibrary;
     @In
-    private ModuleManagerImpl moduleManager;
+    private ModuleManager moduleManager;
     @In
     private AssetManager assetManager;
     @In

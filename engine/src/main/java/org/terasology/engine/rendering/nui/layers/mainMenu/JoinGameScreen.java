@@ -12,7 +12,7 @@ import org.terasology.engine.config.ServerInfo;
 import org.terasology.engine.core.GameEngine;
 import org.terasology.engine.core.GameThread;
 import org.terasology.engine.core.modes.StateLoading;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.i18n.TranslationSystem;
 import org.terasology.engine.identity.storageServiceClient.StorageServiceWorker;
 import org.terasology.engine.network.JoinStatus;
@@ -70,7 +70,7 @@ public class JoinGameScreen extends CoreScreenLayer {
     private GameEngine engine;
 
     @In
-    private ModuleManagerImpl moduleManager;
+    private ModuleManager moduleManager;
 
     @In
     private TranslationSystem translationSystem;

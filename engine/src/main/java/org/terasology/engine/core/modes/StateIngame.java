@@ -22,7 +22,7 @@ import org.terasology.engine.core.ComponentSystemManager;
 import org.terasology.engine.core.GameEngine;
 import org.terasology.engine.core.GameThread;
 import org.terasology.engine.core.bootstrap.EnvironmentSwitchHandler;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.core.subsystem.DisplayDevice;
 import org.terasology.engine.entitySystem.entity.internal.EngineEntityManager;
 import org.terasology.engine.entitySystem.event.internal.EventSystem;
@@ -143,8 +143,8 @@ public class StateIngame implements GameState {
             storageManager.finishSavingAndShutdown();
         }
 
-        ModuleEnvironment oldEnvironment = context.get(ModuleManagerImpl.class).getEnvironment();
-        context.get(ModuleManagerImpl.class).loadEnvironment(Collections.<Module>emptySet(), true);
+        ModuleEnvironment oldEnvironment = context.get(ModuleManager.class).getEnvironment();
+        context.get(ModuleManager.class).loadEnvironment(Collections.<Module>emptySet(), true);
         if (!shuttingDown) {
             context.get(EnvironmentSwitchHandler.class).handleSwitchToEmptyEnvironment(context);
         }

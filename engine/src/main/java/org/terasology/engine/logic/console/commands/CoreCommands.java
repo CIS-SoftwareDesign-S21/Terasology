@@ -12,7 +12,7 @@ import org.terasology.engine.core.TerasologyConstants;
 import org.terasology.engine.core.Time;
 import org.terasology.engine.core.modes.StateLoading;
 import org.terasology.engine.core.modes.StateMainMenu;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.core.paths.PathManager;
 import org.terasology.engine.core.subsystem.DisplayDevice;
 import org.terasology.engine.entitySystem.Component;
@@ -128,7 +128,7 @@ public class CoreCommands extends BaseComponentSystem {
     private SystemConfig systemConfig;
 
     @In
-    private ModuleManagerImpl moduleManager;
+    private ModuleManager moduleManager;
 
     /**
      * Determine if command is matching one of criteria

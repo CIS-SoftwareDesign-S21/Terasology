@@ -15,7 +15,7 @@ import org.terasology.engine.context.internal.ContextImpl;
 import org.terasology.engine.core.bootstrap.EnvironmentSwitchHandler;
 import org.terasology.engine.core.modes.GameState;
 import org.terasology.engine.core.module.ExternalApiWhitelist;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.core.paths.PathManager;
 import org.terasology.engine.core.subsystem.DisplayDevice;
 import org.terasology.engine.core.subsystem.EngineSubsystem;
@@ -309,8 +309,8 @@ public class TerasologyEngine implements GameEngine {
         TypeRegistry.WHITELISTED_PACKAGES = ExternalApiWhitelist.PACKAGES;
         rootContext.put(TypeRegistry.class, typeRegistry);
 
-        ModuleManagerImpl moduleManager = new ModuleManagerImpl(rootContext.get(Config.class), classesOnClasspathsToAddToEngine);
-        rootContext.put(ModuleManagerImpl.class, moduleManager);
+        ModuleManager moduleManager = new ModuleManager(rootContext.get(Config.class), classesOnClasspathsToAddToEngine);
+        rootContext.put(ModuleManager.class, moduleManager);
 
         changeStatus(TerasologyEngineStatus.INITIALIZING_LOWLEVEL_OBJECT_MANIPULATION);
         ReflectFactory reflectFactory = new ReflectionReflectFactory();

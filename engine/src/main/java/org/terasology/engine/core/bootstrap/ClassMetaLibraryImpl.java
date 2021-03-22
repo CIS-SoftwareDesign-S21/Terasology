@@ -17,20 +17,20 @@
 package org.terasology.engine.core.bootstrap;
 
 import org.terasology.engine.context.Context;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.gestalt.naming.Name;
 
 import java.lang.annotation.Annotation;
 
 public class ClassMetaLibraryImpl implements ClassMetaLibrary {
 
-    private final ModuleManagerImpl moduleManager;
+    private final ModuleManager moduleManager;
 
     /**
-     * @param context the context that provides a {@link ModuleManagerImpl}.
+     * @param context the context that provides a {@link ModuleManager}.
      */
     public ClassMetaLibraryImpl(Context context) {
-        moduleManager = context.get(ModuleManagerImpl.class);
+        moduleManager = context.get(ModuleManager.class);
     }
 
     @Override

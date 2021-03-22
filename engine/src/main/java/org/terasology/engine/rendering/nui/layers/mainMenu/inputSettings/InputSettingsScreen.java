@@ -6,14 +6,13 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import org.joml.Vector2i;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.engine.config.BindsConfig;
 import org.terasology.engine.config.ControllerConfig.ControllerInfo;
 import org.terasology.engine.config.facade.InputDeviceConfiguration;
 import org.terasology.engine.context.Context;
 import org.terasology.engine.core.SimpleUri;
-import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.core.subsystem.config.BindsManager;
 import org.terasology.engine.i18n.TranslationSystem;
 import org.terasology.engine.input.BindButtonEvent;
@@ -70,7 +69,7 @@ public class InputSettingsScreen extends CoreScreenLayer {
     private BindsManager bindsManager;
 
     @In
-    private ModuleManagerImpl moduleManager;
+    private ModuleManager moduleManager;
 
     @In
     private InputSystem inputSystem;

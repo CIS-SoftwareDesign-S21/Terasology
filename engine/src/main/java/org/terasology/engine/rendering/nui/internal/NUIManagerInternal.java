@@ -17,7 +17,7 @@ import org.terasology.engine.config.RenderingConfig;
 import org.terasology.engine.context.Context;
 import org.terasology.engine.context.internal.ContextImpl;
 import org.terasology.engine.core.SimpleUri;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.core.subsystem.DisplayDevice;
 import org.terasology.engine.core.subsystem.config.BindsManager;
 import org.terasology.engine.entitySystem.entity.EntityRef;
@@ -154,7 +154,7 @@ public class NUIManagerInternal extends BaseComponentSystem implements NUIManage
             TabbingManager.activateInput = bindsManager.getBindsConfig().getBinds(new SimpleUri("engine:activate")).get(0);
         }
 
-        moduleEnvironment = context.get(ModuleManagerImpl.class).getEnvironment();
+        moduleEnvironment = context.get(ModuleManager.class).getEnvironment();
 
         typeWidgetFactoryRegistry = new TypeWidgetFactoryRegistryImpl(context);
         context.put(TypeWidgetFactoryRegistry.class, typeWidgetFactoryRegistry);
@@ -184,8 +184,8 @@ public class NUIManagerInternal extends BaseComponentSystem implements NUIManage
     }
 
     public void refreshWidgetsLibrary() {
-        widgetsLibrary = new WidgetLibrary(context.get(ModuleManagerImpl.class).getEnvironment(), context.get(ReflectFactory.class), context.get(CopyStrategyLibrary.class));
-        ModuleEnvironment environment = context.get(ModuleManagerImpl.class).getEnvironment();
+        widgetsLibrary = new WidgetLibrary(context.get(ModuleManager.class).getEnvironment(), context.get(ReflectFactory.class), context.get(CopyStrategyLibrary.class));
+        ModuleEnvironment environment = context.get(ModuleManager.class).getEnvironment();
         for (Class<? extends UIWidget> type : environment.getSubtypesOf(UIWidget.class)) {
             widgetsLibrary.register(new ResourceUrn(environment.getModuleProviding(type).toString(), type.getSimpleName()), type);
         }

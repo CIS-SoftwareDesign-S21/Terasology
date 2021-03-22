@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.terasology.engine.config.flexible.AutoConfig;
 import org.terasology.engine.config.flexible.Setting;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.i18n.TranslationSystem;
 import org.terasology.engine.registry.In;
 import org.terasology.gestalt.assets.management.AssetManager;
@@ -54,7 +54,7 @@ public class AutoConfigWidgetFactory implements TypeWidgetFactory {
     @In
     private TranslationSystem translationSystem;
 
-    public AutoConfigWidgetFactory(ModuleManagerImpl moduleManager, AssetManager assetManager) {
+    public AutoConfigWidgetFactory(ModuleManager moduleManager, AssetManager assetManager) {
         this.settingWidgetFactory = new SettingWidgetFactory(moduleManager.getEnvironment(), assetManager);
         this.assetManager = assetManager;
     }

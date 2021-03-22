@@ -38,8 +38,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class ModuleManagerImpl {
-    private static final Logger logger = LoggerFactory.getLogger(ModuleManagerImpl.class);
+public class ModuleManager {
+    private static final Logger logger = LoggerFactory.getLogger(ModuleManager.class);
     private final ModuleFactory moduleFactory;
     private final StandardPermissionProviderFactory permissionProviderFactory = new StandardPermissionProviderFactory();
     private final PermissionProviderFactory wrappingPermissionProviderFactory =
@@ -50,11 +50,11 @@ public class ModuleManagerImpl {
     private final ModuleMetadataJsonAdapter metadataReader;
     private final ModuleInstallManager installManager;
 
-    public ModuleManagerImpl(String masterServerAddress) {
+    public ModuleManager(String masterServerAddress) {
         this(masterServerAddress, Collections.emptyList());
     }
 
-    public ModuleManagerImpl(String masterServerAddress, List<Class<?>> classesOnClasspathsToAddToEngine) {
+    public ModuleManager(String masterServerAddress, List<Class<?>> classesOnClasspathsToAddToEngine) {
         metadataReader = new ModuleMetadataJsonAdapter();
         for (ModuleExtension ext : StandardModuleExtension.values()) {
             metadataReader.registerExtension(ext.getKey(), ext.getValueType());
@@ -90,11 +90,11 @@ public class ModuleManagerImpl {
         installManager = new ModuleInstallManager(this, masterServerAddress);
     }
 
-    public ModuleManagerImpl(Config config) {
+    public ModuleManager(Config config) {
         this(config, Collections.emptyList());
     }
 
-    public ModuleManagerImpl(Config config, List<Class<?>> classesOnClasspathsToAddToEngine) {
+    public ModuleManager(Config config, List<Class<?>> classesOnClasspathsToAddToEngine) {
         this(config.getNetwork().getMasterServer(), classesOnClasspathsToAddToEngine);
     }
 

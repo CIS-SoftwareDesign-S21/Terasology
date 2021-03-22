@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.terasology.engine.config.Config;
 import org.terasology.engine.core.SimpleUri;
 import org.terasology.engine.core.TerasologyConstants;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.game.GameManifest;
 import org.terasology.engine.rendering.nui.layers.mainMenu.savedGames.GameProvider;
 import org.terasology.gestalt.module.Module;
@@ -42,7 +42,7 @@ public class GameManifestProvider {
      * @param config           provides default module selection, world generator
      * @return                 game manifest with default settings
      */
-    public static GameManifest createGameManifest(final UniverseWrapper universeWrapper, final ModuleManagerImpl moduleManager, final Config config) {
+    public static GameManifest createGameManifest(final UniverseWrapper universeWrapper, final ModuleManager moduleManager, final Config config) {
         GameManifest gameManifest = new GameManifest();
         if (StringUtils.isNotBlank(universeWrapper.getGameName())) {
             gameManifest.setTitle(GameProvider.getNextGameName(universeWrapper.getGameName()));

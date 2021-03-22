@@ -25,7 +25,7 @@ import org.terasology.engine.core.GameEngine;
 import org.terasology.engine.core.bootstrap.EnvironmentSwitchHandler;
 import org.terasology.engine.core.modes.StateMainMenu;
 import org.terasology.engine.core.modes.VariableStepLoadProcess;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.game.Game;
 import org.terasology.engine.game.GameManifest;
 import org.terasology.engine.network.JoinStatus;
@@ -107,7 +107,7 @@ public class JoinServer extends VariableStepLoadProcess {
             gameManifest.setBlockIdMap(blockMap);
             gameManifest.setTime(networkSystem.getServer().getInfo().getTime());
 
-            ModuleManagerImpl moduleManager = context.get(ModuleManagerImpl.class);
+            ModuleManager moduleManager = context.get(ModuleManager.class);
 
             Set<Module> moduleSet = Sets.newLinkedHashSet();
             for (NameVersion moduleInfo : networkSystem.getServer().getInfo().getModuleList()) {

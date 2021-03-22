@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.terasology.engine.context.internal.ContextImpl;
 import org.terasology.engine.core.bootstrap.EntitySystemSetupUtil;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.entitySystem.entity.EntityRef;
 import org.terasology.engine.entitySystem.entity.internal.EngineEntityManager;
 import org.terasology.engine.entitySystem.entity.internal.OwnershipHelper;
@@ -29,7 +29,7 @@ import static org.mockito.Mockito.when;
  */
 public class OwnershipHelperTest {
 
-    private static  ModuleManagerImpl moduleManager;
+    private static ModuleManager moduleManager;
 
     EngineEntityManager entityManager;
 
@@ -41,7 +41,7 @@ public class OwnershipHelperTest {
     @BeforeEach
     public void setup() {
         ContextImpl context = new ContextImpl();
-        context.put( ModuleManagerImpl.class, moduleManager);
+        context.put( ModuleManager.class, moduleManager);
         NetworkSystem networkSystem = mock(NetworkSystem.class);
         when(networkSystem.getMode()).thenReturn(NetworkMode.NONE);
         context.put(NetworkSystem.class, networkSystem);

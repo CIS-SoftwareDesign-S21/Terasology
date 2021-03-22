@@ -23,7 +23,7 @@ import org.terasology.engine.core.GameEngine;
 import org.terasology.engine.core.bootstrap.EnvironmentSwitchHandler;
 import org.terasology.engine.core.modes.SingleStepLoadProcess;
 import org.terasology.engine.core.modes.StateMainMenu;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.game.GameManifest;
 import org.terasology.gestalt.module.Module;
 import org.terasology.gestalt.module.ModuleEnvironment;
@@ -72,7 +72,7 @@ public class RegisterMods extends SingleStepLoadProcess {
             }
             return false;
         } else {
-            ModuleManagerImpl moduleManager = context.get(ModuleManagerImpl.class);
+            ModuleManager moduleManager = context.get(ModuleManager.class);
             List<Name> moduleIds = gameManifest.getModules().stream().map(NameVersion::getName)
                     .collect(Collectors.toCollection(ArrayList::new));
 

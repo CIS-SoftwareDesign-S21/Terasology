@@ -20,7 +20,7 @@ import org.terasology.engine.core.TerasologyConstants;
 import org.terasology.engine.core.modes.StateLoading;
 import org.terasology.engine.core.module.DependencyResolutionFailedException;
 import org.terasology.engine.core.module.ModuleInstaller;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.core.module.StandardModuleExtension;
 import org.terasology.engine.game.GameManifest;
 import org.terasology.engine.i18n.TranslationSystem;
@@ -85,7 +85,7 @@ public class AdvancedGameSetupScreen extends CoreScreenLayer {
     private final Comparator<? super ModuleSelectionInfo> moduleInfoComparator = Comparator.comparing(o -> o.getMetadata()
             .getDisplayName().toString());
     @In
-    private ModuleManagerImpl moduleManager;
+    private ModuleManager moduleManager;
     @In
     private Config config;
     @In

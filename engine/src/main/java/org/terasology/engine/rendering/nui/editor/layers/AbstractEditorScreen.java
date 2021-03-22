@@ -10,7 +10,7 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.stream.JsonReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.registry.In;
 import org.terasology.engine.rendering.nui.CoreScreenLayer;
 import org.terasology.engine.rendering.nui.editor.systems.AbstractEditorSystem;
@@ -58,7 +58,7 @@ public abstract class AbstractEditorScreen extends CoreScreenLayer {
      * Used to get the {@link Path} of an asset.
      */
     @In
-    private ModuleManagerImpl moduleManager;
+    private ModuleManager moduleManager;
 
     /**
      * The editor system.

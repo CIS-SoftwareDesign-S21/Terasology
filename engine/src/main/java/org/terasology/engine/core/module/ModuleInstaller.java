@@ -38,10 +38,10 @@ public class ModuleInstaller implements Callable<List<Module>> {
     private static final Logger logger = LoggerFactory.getLogger(ModuleInstaller.class);
 
     private Iterable<Module> moduleList;
-    private ModuleManagerImpl moduleManager;
+    private ModuleManager moduleManager;
     private MultiFileTransferProgressListener downloadProgressListener;
 
-    ModuleInstaller(ModuleManagerImpl moduleManager, Iterable<Module> moduleList,
+    ModuleInstaller(ModuleManager moduleManager, Iterable<Module> moduleList,
                     MultiFileTransferProgressListener downloadProgressListener) {
         this.moduleList = moduleList;
         this.downloadProgressListener = downloadProgressListener;

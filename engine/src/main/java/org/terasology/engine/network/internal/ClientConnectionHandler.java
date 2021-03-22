@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.terasology.engine.config.Config;
 import org.terasology.engine.core.EngineTime;
 import org.terasology.engine.core.Time;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.core.paths.PathManager;
 import org.terasology.engine.network.JoinStatus;
 import org.terasology.engine.registry.CoreRegistry;
@@ -35,7 +35,7 @@ public class ClientConnectionHandler extends ChannelInboundHandlerAdapter {
     private final JoinStatusImpl joinStatus;
     private NetworkSystemImpl networkSystem;
     private ServerImpl server;
-    private ModuleManagerImpl moduleManager;
+    private ModuleManager moduleManager;
 
     private Set<String> missingModules = Sets.newHashSet();
     private NetData.ModuleDataHeader receivingModule;
@@ -57,7 +57,7 @@ public class ClientConnectionHandler extends ChannelInboundHandlerAdapter {
         this.joinStatus = joinStatus;
         // TODO: implement translation of errorMessage in messageReceived once context is available
         // See https://github.com/MovingBlocks/Terasology/pull/3332#discussion_r187081375
-        this.moduleManager = CoreRegistry.get(ModuleManagerImpl.class);
+        this.moduleManager = CoreRegistry.get(ModuleManager.class);
     }
 
     /**

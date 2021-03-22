@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.terasology.engine.context.Context;
 import org.terasology.engine.core.SimpleUri;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.gestalt.module.Module;
 import org.terasology.gestalt.module.ModuleEnvironment;
 import org.terasology.gestalt.module.dependencyresolution.DependencyResolver;
@@ -39,7 +39,7 @@ public class WorldGeneratorManager {
     }
 
     public void refresh() {
-        ModuleManagerImpl moduleManager = context.get(ModuleManagerImpl.class);
+        ModuleManager moduleManager = context.get(ModuleManager.class);
         List<WorldGeneratorInfo> infos = Lists.newArrayList();
         for (Name moduleId : moduleManager.getRegistry().getModuleIds()) {
             Module module = moduleManager.getRegistry().getLatestModuleVersion(moduleId);
@@ -92,7 +92,7 @@ public class WorldGeneratorManager {
      * @return The instantiated world generator.
      */
     public static WorldGenerator createGenerator(SimpleUri uri, Context context) throws UnresolvedWorldGeneratorException {
-        ModuleManagerImpl moduleManager = context.get(ModuleManagerImpl.class);
+        ModuleManager moduleManager = context.get(ModuleManager.class);
         Module module = moduleManager.getEnvironment().get(uri.getModuleName());
         if (module == null) {
             DependencyResolver resolver = new DependencyResolver(moduleManager.getRegistry());

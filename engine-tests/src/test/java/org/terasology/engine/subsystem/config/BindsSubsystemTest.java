@@ -8,7 +8,7 @@ import org.terasology.engine.config.facade.BindsConfiguration;
 import org.terasology.engine.context.Context;
 import org.terasology.engine.context.internal.ContextImpl;
 import org.terasology.engine.core.SimpleUri;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.core.subsystem.config.BindsSubsystem.BindsConfigAdapter;
 import org.terasology.engine.input.BindButtonEvent;
 import org.terasology.engine.input.BindableButton;
@@ -61,7 +61,7 @@ public class BindsSubsystemTest {
     }
 
     private void setUpMockModuleEnvironment() {
-        ModuleManagerImpl moduleManager = mock(ModuleManagerImpl.class);
+        ModuleManager moduleManager = mock(ModuleManager.class);
         ModuleRegistry moduleRegistry = new TableModuleRegistry();
 
         Module module = mock(Module.class);
@@ -81,7 +81,7 @@ public class BindsSubsystemTest {
         when(environment.getTypesAnnotatedWith(eq(RegisterBindAxis.class))).thenReturn(registerRealBindAxisClasses);
         when(environment.getTypesAnnotatedWith(eq(RegisterBindAxis.class), any())).thenReturn(registerRealBindAxisClasses);
         when(environment.getModuleProviding(any())).thenReturn(new Name(TEST_MODULE));
-        context.put(ModuleManagerImpl.class, moduleManager);
+        context.put(ModuleManager.class, moduleManager);
     }
 
     @Test

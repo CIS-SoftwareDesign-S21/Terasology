@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 import org.terasology.engine.config.Config;
 import org.terasology.engine.config.ServerInfo;
 import org.terasology.engine.config.TelemetryConfig;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.i18n.TranslationSystem;
 import org.terasology.engine.registry.In;
 import org.terasology.engine.rendering.nui.CoreScreenLayer;
@@ -73,7 +73,7 @@ public class TelemetryScreen extends CoreScreenLayer {
     private Config config;
 
     @In
-    private ModuleManagerImpl moduleManager;
+    private ModuleManager moduleManager;
 
     @In
     private TranslationSystem translationSystem;

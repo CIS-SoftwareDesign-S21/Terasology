@@ -18,7 +18,7 @@ import org.terasology.engine.TerasologyTestingEnvironment;
 import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.gestalt.assets.management.AssetManager;
 import org.terasology.engine.core.bootstrap.EntitySystemSetupUtil;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.core.paths.PathManager;
 import org.terasology.engine.entitySystem.entity.EntityRef;
 import org.terasology.engine.entitySystem.entity.internal.EngineEntityManager;
@@ -110,7 +110,7 @@ public class StorageManagerTest extends TerasologyTestingEnvironment {
         blockManager = context.get(BlockManager.class);
         extraDataManager = context.get(ExtraBlockDataManager.class);
 
-        ModuleManagerImpl moduleManager = mock(ModuleManagerImpl.class);
+        ModuleManager moduleManager = mock(ModuleManager.class);
 
         when(moduleManager.getEnvironment()).thenReturn(moduleEnvironment);
 

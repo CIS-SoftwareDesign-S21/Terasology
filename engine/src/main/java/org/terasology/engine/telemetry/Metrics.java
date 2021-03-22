@@ -18,7 +18,7 @@ package org.terasology.engine.telemetry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.terasology.engine.context.Context;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.gestalt.module.Module;
 import org.terasology.gestalt.module.ModuleEnvironment;
 import org.terasology.gestalt.module.dependencyresolution.DependencyResolver;
@@ -56,7 +56,7 @@ public class Metrics {
 
     private Set<Class> fetchMetricsClassFromEnvironemnt(Context context) {
 
-        ModuleManagerImpl moduleManager = context.get(ModuleManagerImpl.class);
+        ModuleManager moduleManager = context.get(ModuleManager.class);
         Set<Class> metricsClassSet = new HashSet<>();
         DependencyResolver resolver = new DependencyResolver(moduleManager.getRegistry());
         for (Name moduleId : moduleManager.getRegistry().getModuleIds()) {

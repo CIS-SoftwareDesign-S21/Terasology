@@ -28,12 +28,12 @@ import java.util.concurrent.Callable;
 
 public class ModuleInstallManager {
 
-    private ModuleManagerImpl moduleManager;
+    private ModuleManager moduleManager;
     private ModuleRegistry remoteRegistry;
     private ModuleListDownloader remoteRegistryUpdater;
     private ModuleDownloadListGenerator downloadListGenerator;
 
-    ModuleInstallManager(ModuleManagerImpl moduleManager, String remoteMasterServerAddress) {
+    ModuleInstallManager(ModuleManager moduleManager, String remoteMasterServerAddress) {
         this.moduleManager = moduleManager;
         this.remoteRegistryUpdater = new ModuleListDownloader(remoteMasterServerAddress);
     }

@@ -4,7 +4,7 @@
 package org.terasology.engine.entitySystem.metadata;
 
 import org.terasology.engine.context.Context;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.gestalt.module.ModuleEnvironment;
 import org.terasology.persistence.typeHandling.TypeHandlerLibrary;
 import org.terasology.reflection.copy.CopyStrategyLibrary;
@@ -22,7 +22,7 @@ public class EntitySystemLibrary {
 
     public EntitySystemLibrary(Context context, TypeHandlerLibrary typeHandlerLibrary) {
         // NOTE: Work-around to fix tests
-        ModuleManagerImpl manager = context.get(ModuleManagerImpl.class);
+        ModuleManager manager = context.get(ModuleManager.class);
         ModuleEnvironment environment = null;
         if (manager != null) {
             environment = manager.getEnvironment();

@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.terasology.engine.config.flexible.AutoConfigManager;
 import org.terasology.engine.context.Context;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.entitySystem.Component;
 import org.terasology.engine.entitySystem.metadata.ComponentLibrary;
 import org.terasology.engine.entitySystem.metadata.EntitySystemLibrary;
@@ -58,7 +58,7 @@ public final class EnvironmentSwitchHandler {
 
     @SuppressWarnings("unchecked")
     public void handleSwitchToGameEnvironment(Context context) {
-        ModuleManagerImpl moduleManager = context.get(ModuleManagerImpl.class);
+        ModuleManager moduleManager = context.get(ModuleManager.class);
         ModuleEnvironment environment = moduleManager.getEnvironment();
 
         TypeRegistry typeRegistry = context.get(TypeRegistry.class);
@@ -161,13 +161,13 @@ public final class EnvironmentSwitchHandler {
 
     public void handleSwitchBackFromPreviewEnvironment(Context context) {
         // The newly created ComponentLibrary instance cannot be invalidated in context
-        ModuleEnvironment environment = context.get(ModuleManagerImpl.class).getEnvironment();
+        ModuleEnvironment environment = context.get(ModuleManager.class).getEnvironment();
         cheapAssetManagerUpdate(context, environment);
     }
 
 
     public void handleSwitchToEmptyEnvironment(Context context) {
-        ModuleEnvironment environment = context.get(ModuleManagerImpl.class).getEnvironment();
+        ModuleEnvironment environment = context.get(ModuleManager.class).getEnvironment();
         cheapAssetManagerUpdate(context, environment);
     }
 

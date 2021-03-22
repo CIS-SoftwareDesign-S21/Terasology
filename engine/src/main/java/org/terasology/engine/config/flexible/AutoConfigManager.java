@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.terasology.engine.context.Context;
 import org.terasology.engine.core.SimpleUri;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.core.paths.PathManager;
 import org.terasology.engine.registry.InjectionHelper;
 import org.terasology.engine.utilities.ReflectionUtil;
@@ -40,7 +40,7 @@ public class AutoConfigManager {
     }
 
     public void loadConfigsIn(Context context) {
-        ModuleEnvironment environment = context.get(ModuleManagerImpl.class).getEnvironment();
+        ModuleEnvironment environment = context.get(ModuleManager.class).getEnvironment();
 
         for (Class<? extends AutoConfig> configClass : environment.getSubtypesOf(AutoConfig.class)) {
             if (context.get(configClass) != null) {

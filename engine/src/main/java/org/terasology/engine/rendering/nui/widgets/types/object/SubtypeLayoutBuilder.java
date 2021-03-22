@@ -6,11 +6,9 @@ import com.google.common.collect.ImmutableSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.terasology.engine.core.module.ModuleContext;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.gestalt.module.Module;
 import org.terasology.gestalt.module.ModuleEnvironment;
-import org.terasology.gestalt.module.sandbox.PermissionProvider;
-import org.terasology.gestalt.module.sandbox.PermissionProviderFactory;
 import org.terasology.gestalt.naming.Name;
 import org.terasology.nui.databinding.Binding;
 import org.terasology.nui.databinding.NotifyingBinding;
@@ -38,12 +36,12 @@ public class SubtypeLayoutBuilder<T> extends ExpandableLayoutBuilder<T> {
     private final TypeWidgetLibrary library;
 
     private final List<TypeInfo<T>> allowedSubtypes;
-    private final ModuleManagerImpl moduleManager;
+    private final ModuleManager moduleManager;
     private final TypeWidgetBuilder<T> baseTypeWidgetBuilder;
 
     public SubtypeLayoutBuilder(TypeInfo<T> baseType,
                                 TypeWidgetLibrary library,
-                                ModuleManagerImpl moduleManager,
+                                ModuleManager moduleManager,
                                 TypeRegistry typeRegistry) {
         this.library = library;
         this.baseType = baseType;

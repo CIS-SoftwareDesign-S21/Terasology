@@ -24,7 +24,7 @@ import org.terasology.engine.config.Config;
 import org.terasology.engine.config.facade.BindsConfiguration;
 import org.terasology.engine.context.Context;
 import org.terasology.engine.core.SimpleUri;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.core.subsystem.EngineSubsystem;
 import org.terasology.engine.input.BindAxisEvent;
 import org.terasology.engine.input.BindButtonEvent;
@@ -146,7 +146,7 @@ public class BindsSubsystem implements EngineSubsystem, BindsManager {
     }
 
     private void updateDefaultBinds(Context passedContext, BindsConfiguration config) {
-        ModuleManagerImpl moduleManager = passedContext.get(ModuleManagerImpl.class);
+        ModuleManager moduleManager = passedContext.get(ModuleManager.class);
         DependencyResolver resolver = new DependencyResolver(moduleManager.getRegistry());
         for (Name moduleId : moduleManager.getRegistry().getModuleIds()) {
             ResolutionResult result = resolver.resolve(moduleId);
@@ -208,7 +208,7 @@ public class BindsSubsystem implements EngineSubsystem, BindsManager {
 
     @Override
     public void registerBinds() {
-        ModuleManagerImpl moduleManager = context.get(ModuleManagerImpl.class);
+        ModuleManager moduleManager = context.get(ModuleManager.class);
         ModuleEnvironment environment = moduleManager.getEnvironment();
         clearBinds();
         registerButtonBinds(environment);

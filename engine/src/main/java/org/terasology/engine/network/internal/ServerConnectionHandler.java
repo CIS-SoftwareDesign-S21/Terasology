@@ -7,7 +7,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.identity.PublicIdentityCertificate;
 import org.terasology.engine.registry.CoreRegistry;
 import org.terasology.engine.rendering.world.viewDistance.ViewDistance;
@@ -35,7 +35,7 @@ public class ServerConnectionHandler extends ChannelInboundHandlerAdapter {
 
     private PublicIdentityCertificate identity;
 
-    private ModuleManagerImpl moduleManager = CoreRegistry.get(ModuleManagerImpl.class);
+    private ModuleManager moduleManager = CoreRegistry.get(ModuleManager.class);
 
     public ServerConnectionHandler(NetworkSystemImpl networkSystem) {
         this.networkSystem = networkSystem;

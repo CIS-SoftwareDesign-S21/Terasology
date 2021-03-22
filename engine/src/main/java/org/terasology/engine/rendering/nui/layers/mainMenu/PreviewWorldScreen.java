@@ -5,14 +5,13 @@ package org.terasology.engine.rendering.nui.layers.mainMenu;
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.engine.config.Config;
 import org.terasology.engine.context.Context;
 import org.terasology.engine.context.internal.ContextImpl;
 import org.terasology.engine.core.SimpleUri;
 import org.terasology.engine.core.bootstrap.EnvironmentSwitchHandler;
-import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.entitySystem.Component;
 import org.terasology.engine.entitySystem.metadata.ComponentLibrary;
 import org.terasology.engine.rendering.assets.texture.Texture;
@@ -70,7 +69,7 @@ public class PreviewWorldScreen extends CoreScreenLayer {
     private static final Logger logger = LoggerFactory.getLogger(PreviewWorldScreen.class);
 
     @In
-    private ModuleManagerImpl moduleManager;
+    private ModuleManager moduleManager;
 
     @In
     private ModuleAwareAssetTypeManager assetTypeManager;

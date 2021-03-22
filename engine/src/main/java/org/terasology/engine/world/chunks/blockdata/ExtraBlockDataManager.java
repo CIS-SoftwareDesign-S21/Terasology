@@ -6,7 +6,7 @@ package org.terasology.engine.world.chunks.blockdata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.terasology.engine.context.Context;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.gestalt.module.ModuleEnvironment;
 import org.terasology.gestalt.module.sandbox.API;
 import org.terasology.engine.world.block.Block;
@@ -95,7 +95,7 @@ public class ExtraBlockDataManager {
 
     // Find requests for extensions and which blocks they apply to.
     private Map<Integer, Map<String, Set<Block>>> getFieldsFromAnnotations(Context context) {
-        ModuleEnvironment environment = context.get(ModuleManagerImpl.class).getEnvironment();
+        ModuleEnvironment environment = context.get(ModuleManager.class).getEnvironment();
         Collection<Block> blocks = context.get(BlockManager.class).listRegisteredBlocks();
 
         Map<Integer, Map<String, Set<Block>>> fieldss = new HashMap<>();

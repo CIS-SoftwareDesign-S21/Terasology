@@ -5,7 +5,7 @@ package org.terasology.engine.core.bootstrap;
 
 import org.terasology.engine.audio.events.PlaySoundEvent;
 import org.terasology.engine.context.Context;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.entitySystem.Component;
 import org.terasology.engine.entitySystem.entity.EntityManager;
 import org.terasology.engine.entitySystem.entity.EntityRef;
@@ -69,7 +69,7 @@ public final class EntitySystemSetupUtil {
         CopyStrategyLibrary copyStrategyLibrary = new CopyStrategyLibrary(reflectFactory);
         context.put(CopyStrategyLibrary.class, copyStrategyLibrary);
 
-        ModuleManagerImpl moduleManager = context.get(ModuleManagerImpl.class);
+        ModuleManager moduleManager = context.get(ModuleManager.class);
         TypeRegistry typeRegistry = context.get(TypeRegistry.class);
         TypeHandlerLibrary typeHandlerLibrary = TypeHandlerLibraryImpl.forModuleEnvironment(moduleManager, typeRegistry);
         context.put(TypeHandlerLibrary.class, typeHandlerLibrary);
@@ -101,7 +101,7 @@ public final class EntitySystemSetupUtil {
      * </ul>
      */
     public static void addEntityManagementRelatedClasses(Context context) {
-        ModuleManagerImpl moduleManager = context.get(ModuleManagerImpl.class);
+        ModuleManager moduleManager = context.get(ModuleManager.class);
         ModuleEnvironment environment = moduleManager.getEnvironment();
         NetworkSystem networkSystem = context.get(NetworkSystem.class);
 

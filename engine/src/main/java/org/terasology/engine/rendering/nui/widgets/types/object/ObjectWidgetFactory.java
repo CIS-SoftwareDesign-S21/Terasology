@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package org.terasology.engine.rendering.nui.widgets.types.object;
 
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.nui.widgets.types.TypeWidgetBuilder;
 import org.terasology.nui.widgets.types.TypeWidgetFactory;
 import org.terasology.nui.widgets.types.TypeWidgetLibrary;
@@ -15,7 +15,7 @@ import java.util.Optional;
 
 public class ObjectWidgetFactory implements TypeWidgetFactory {
     @In
-    private ModuleManagerImpl moduleManager;
+    private ModuleManager moduleManager;
 
     @In
     private TypeRegistry typeRegistry;

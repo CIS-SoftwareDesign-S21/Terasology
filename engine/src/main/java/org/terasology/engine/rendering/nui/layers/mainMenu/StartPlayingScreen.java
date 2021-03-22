@@ -9,7 +9,7 @@ import org.terasology.engine.core.GameEngine;
 import org.terasology.engine.core.SimpleUri;
 import org.terasology.engine.core.TerasologyConstants;
 import org.terasology.engine.core.modes.StateLoading;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.game.GameManifest;
 import org.terasology.engine.i18n.TranslationSystem;
 import org.terasology.engine.network.NetworkMode;
@@ -34,7 +34,7 @@ public class StartPlayingScreen extends CoreScreenLayer {
     public static final ResourceUrn ASSET_URI = new ResourceUrn("engine:startPlayingScreen");
 
     @In
-    private ModuleManagerImpl moduleManager;
+    private ModuleManager moduleManager;
 
     @In
     private Config config;

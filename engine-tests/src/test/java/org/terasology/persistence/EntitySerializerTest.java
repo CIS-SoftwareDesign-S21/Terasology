@@ -6,14 +6,13 @@ import com.google.common.collect.Lists;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.gestalt.assets.management.AssetManager;
 import org.terasology.gestalt.assets.module.ModuleAwareAssetTypeManager;
 import org.terasology.engine.context.Context;
 import org.terasology.engine.context.internal.ContextImpl;
 import org.terasology.engine.core.bootstrap.EntitySystemSetupUtil;
-import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.entitySystem.entity.EntityRef;
 import org.terasology.engine.entitySystem.entity.internal.EngineEntityManager;
 import org.terasology.engine.entitySystem.entity.internal.EntityInfoComponent;
@@ -49,7 +48,7 @@ import static org.terasology.engine.entitySystem.entity.internal.EntityScope.GLO
 public class EntitySerializerTest {
 
     private static Context context;
-    private static ModuleManagerImpl moduleManager;
+    private static ModuleManager moduleManager;
     private ComponentLibrary componentLibrary;
     private EngineEntityManager entityManager;
     private EntitySerializer entitySerializer;
@@ -62,7 +61,7 @@ public class EntitySerializerTest {
         CoreRegistry.setContext(context);
         context.put(RecordAndReplayCurrentStatus.class, new RecordAndReplayCurrentStatus());
         moduleManager = ModuleManagerFactory.create();
-        context.put(ModuleManagerImpl.class, moduleManager);
+        context.put(ModuleManager.class, moduleManager);
 
         ModuleAwareAssetTypeManager assetTypeManager = new ModuleAwareAssetTypeManagerImpl();
         assetTypeManager.createAssetType(Prefab.class, PojoPrefab::new, "prefabs");

@@ -6,13 +6,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.gestalt.assets.AssetType;
 import org.terasology.gestalt.assets.management.AssetManager;
 import org.terasology.gestalt.assets.module.ModuleAwareAssetTypeManager;
 import org.terasology.engine.context.internal.ContextImpl;
 import org.terasology.engine.core.bootstrap.EntitySystemSetupUtil;
-import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.entitySystem.metadata.ComponentLibrary;
 import org.terasology.engine.entitySystem.prefab.Prefab;
 import org.terasology.engine.entitySystem.prefab.PrefabData;
@@ -58,8 +57,8 @@ public class PrefabTest {
         ContextImpl context = new ContextImpl();
         context.put(RecordAndReplayCurrentStatus.class, new RecordAndReplayCurrentStatus());
         CoreRegistry.setContext(context);
-        ModuleManagerImpl moduleManager = ModuleManagerFactory.create();
-        context.put(ModuleManagerImpl.class, moduleManager);
+        ModuleManager moduleManager = ModuleManagerFactory.create();
+        context.put(ModuleManager.class, moduleManager);
 
         EntitySystemSetupUtil.addReflectionBasedLibraries(context);
 

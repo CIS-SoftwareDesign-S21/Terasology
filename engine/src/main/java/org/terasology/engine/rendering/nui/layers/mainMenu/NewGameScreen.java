@@ -10,7 +10,7 @@ import org.terasology.engine.config.ModuleConfig;
 import org.terasology.engine.core.GameEngine;
 import org.terasology.engine.core.SimpleUri;
 import org.terasology.engine.core.modes.StateLoading;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.core.module.StandardModuleExtension;
 import org.terasology.engine.game.GameManifest;
 import org.terasology.engine.i18n.TranslationSystem;
@@ -51,7 +51,7 @@ public class NewGameScreen extends CoreScreenLayer {
     private static final String DEFAULT_GAME_TEMPLATE_NAME = "JoshariasSurvival";
 
     @In
-    private ModuleManagerImpl moduleManager;
+    private ModuleManager moduleManager;
 
     @In
     private Config config;

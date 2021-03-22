@@ -10,7 +10,7 @@ import org.terasology.engine.context.Context;
 import org.terasology.engine.core.module.DependencyResolutionFailedException;
 import org.terasology.engine.core.module.ExtraDataModuleExtension;
 import org.terasology.engine.core.module.ModuleInstaller;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.core.module.RemoteModuleExtension;
 import org.terasology.engine.core.module.StandardModuleExtension;
 import org.terasology.engine.i18n.TranslationSystem;
@@ -67,7 +67,7 @@ public class ModuleDetailsScreen extends CoreScreenLayer {
     private static final String DEFAULT_GITHUB_MODULE_URL = "https://github.com/Terasology/";
     private static final List<String> INTERNAL_MODULES = Arrays.asList("engine");
     @In
-    private ModuleManagerImpl moduleManager;
+    private ModuleManager moduleManager;
     @In
     private TranslationSystem translationSystem;
     @In

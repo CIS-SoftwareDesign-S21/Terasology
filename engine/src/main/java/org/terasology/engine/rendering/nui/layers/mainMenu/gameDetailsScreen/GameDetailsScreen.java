@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.terasology.engine.context.Context;
 import org.terasology.engine.core.SimpleUri;
 import org.terasology.engine.core.TerasologyConstants;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.i18n.TranslationSystem;
 import org.terasology.engine.registry.In;
 import org.terasology.engine.rendering.nui.CoreScreenLayer;
@@ -71,7 +71,7 @@ public class GameDetailsScreen extends CoreScreenLayer {
     @In
     private WorldGeneratorManager worldGeneratorManager;
     @In
-    private ModuleManagerImpl moduleManager;
+    private ModuleManager moduleManager;
     @In
     private TranslationSystem translationSystem;
     @In

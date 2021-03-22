@@ -9,7 +9,7 @@ import com.google.common.collect.ImmutableList;
 import org.joml.Vector3f;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.engine.entitySystem.Component;
 import org.terasology.engine.entitySystem.entity.EntityRef;
 import org.terasology.math.TeraMath;
@@ -45,7 +45,7 @@ public class ParticleUpdaterImpl implements ParticleUpdater {
      */
     private static final int PHYSICS_SKIP_NR = 100;
 
-    private ModuleManagerImpl moduleManager;
+    private ModuleManager moduleManager;
 
     /**
      * Map of Generators to the functions that process them.
@@ -67,7 +67,7 @@ public class ParticleUpdaterImpl implements ParticleUpdater {
     private final Physics physics;
     private float movingAvgDelta = 1.0f / 60.0f; // Starting guess average physics updateParticleSystem delta
 
-    public ParticleUpdaterImpl(final Physics physics, final ModuleManagerImpl moduleManager) {
+    public ParticleUpdaterImpl(final Physics physics, final ModuleManager moduleManager) {
         this.physics = physics;
         this.moduleManager = moduleManager;
     }

@@ -5,14 +5,13 @@ package org.terasology.engine.utilities;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.gestalt.assets.Asset;
 import org.terasology.gestalt.assets.AssetData;
 import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.gestalt.assets.management.AssetManager;
 import org.terasology.engine.audio.StaticSound;
 import org.terasology.engine.audio.StreamingSound;
-import org.terasology.engine.core.module.ModuleManagerImpl;
 import org.terasology.engine.entitySystem.prefab.Prefab;
 import org.terasology.gestalt.module.sandbox.API;
 import org.terasology.gestalt.naming.Name;
@@ -52,7 +51,7 @@ public final class Assets {
      * @return An iterable over the list of available modules
      */
     public static Iterable<Name> listModules() {
-        return CoreRegistry.get(ModuleManagerImpl.class).getEnvironment().getModuleIdsOrderedByDependencies();
+        return CoreRegistry.get(ModuleManager.class).getEnvironment().getModuleIdsOrderedByDependencies();
     }
 
     /**

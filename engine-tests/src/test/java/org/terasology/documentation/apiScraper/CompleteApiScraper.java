@@ -20,7 +20,7 @@ import com.google.common.collect.Multimaps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.terasology.engine.core.module.ExternalApiWhitelist;
-import org.terasology.engine.core.module.ModuleManagerImpl;
+import org.terasology.engine.core.module.ModuleManager;
 import org.terasology.gestalt.module.ModuleEnvironment;
 import org.terasology.gestalt.module.sandbox.API;
 import org.terasology.engine.testUtil.ModuleManagerFactory;
@@ -56,7 +56,7 @@ final class CompleteApiScraper {
      * @throws Exception if the module environment cannot be loaded
      */
     static StringBuffer getApi() throws Exception {
-        ModuleManagerImpl moduleManager = ModuleManagerFactory.create();
+        ModuleManager moduleManager = ModuleManagerFactory.create();
         ModuleEnvironment environment = moduleManager.getEnvironment();
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 
