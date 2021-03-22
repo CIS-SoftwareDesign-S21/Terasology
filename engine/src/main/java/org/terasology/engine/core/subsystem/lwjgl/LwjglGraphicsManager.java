@@ -95,7 +95,7 @@ public class LwjglGraphicsManager implements LwjglGraphicsProcessing {
                         return path.getPath().get(1).equals("fonts");
                     }
                 }));
-        assetTypeManager.createAssetType(Shader.class, GLSLShader::create, "shaders");
+        assetTypeManager.createAssetType(Shader.class, (urn, assetType, data) -> GLSLShader.create(urn, assetType, data, this), "shaders");
         assetTypeManager.createAssetType(Material.class, (urn, assetType, data) ->
                         GLSLMaterial.create(urn, this, assetType, data),
                 "materials");
@@ -103,7 +103,7 @@ public class LwjglGraphicsManager implements LwjglGraphicsProcessing {
                 "mesh");
         assetTypeManager.createAssetType(SkeletalMesh.class,
                 (urn, assetType, data) ->
-                         OpenGLSkeletalMesh.create(urn, assetType, data, this, bufferPool),
+                        OpenGLSkeletalMesh.create(urn, assetType, data, this, bufferPool),
                 "skeletalMesh");
         assetTypeManager.createAssetType(MeshAnimation.class, MeshAnimationImpl::new,
                 "animations", "skeletalMesh");
@@ -111,7 +111,7 @@ public class LwjglGraphicsManager implements LwjglGraphicsProcessing {
         assetTypeManager.createAssetType(MeshAnimationBundle.class, MeshAnimationBundle::new,
                 "skeletalMesh", "animations");
         assetTypeManager.createAssetType(Subtexture.class, Subtexture::new);
-    }{}
+    }
 
     public void registerRenderingSubsystem(Context context) {
         context.put(RenderingSubsystemFactory.class, new LwjglRenderingSubsystemFactory(bufferPool));

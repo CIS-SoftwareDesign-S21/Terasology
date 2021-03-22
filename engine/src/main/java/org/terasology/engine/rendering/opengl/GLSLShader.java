@@ -79,8 +79,8 @@ public class GLSLShader extends Shader {
     }
 
     private EnumSet<ShaderProgramFeature> availableFeatures = Sets.newEnumSet(Collections.emptyList(), ShaderProgramFeature.class);
-
     private ShaderData shaderProgramBase;
+    private final LwjglGraphicsProcessing graphicsProcessing;
     private Map<String, ShaderParameterMetadata> parameters = Maps.newHashMap();
 
     private Config config = CoreRegistry.get(Config.class);
@@ -89,15 +89,18 @@ public class GLSLShader extends Shader {
 
 
     public GLSLShader(ResourceUrn urn, AssetType<?, ShaderData> assetType, ShaderData data,
-                      DisposalAction disposalAction) {
+                      DisposalAction disposalAction, LwjglGraphicsProcessing graphicsProcessing) {
         super(urn, assetType, disposalAction);
         this.disposalAction = disposalAction;
-        reload(data);
+        this.graphicsProcessing = graphicsProcessing;
+        graphicsProcessing.asynchToDisplayThread(() -> {
+            reload(data);
+        });
     }
 
 
-    public static GLSLShader create(ResourceUrn urn, AssetType<?, ShaderData> assetType, ShaderData data) {
-        return new GLSLShader(urn, assetType, data, new GLSLShader.DisposalAction(urn));
+    public static GLSLShader create(ResourceUrn urn, AssetType<?, ShaderData> assetType, ShaderData data, LwjglGraphicsProcessing graphicsProcessing) {
+        return new GLSLShader(urn, assetType, data, new GLSLShader.DisposalAction(urn, graphicsProcessing), graphicsProcessing);
     }
 
     private static InputStreamReader getInputStreamReaderFromResource(String resource) {
@@ -126,7 +129,9 @@ public class GLSLShader extends Shader {
 
     @Override
     public void recompile() {
-        registerAllShaderPermutations();
+        graphicsProcessing.asynchToDisplayThread(() -> {
+            registerAllShaderPermutations();
+        });
     }
 
 
@@ -399,14 +404,16 @@ public class GLSLShader extends Shader {
     public static class DisposalAction implements DisposableResource {
 
         private final ResourceUrn urn;
+        private final LwjglGraphicsProcessing graphicsProcessing;
 
         private final TIntIntMap fragmentPrograms = new TIntIntHashMap();
         private final TIntIntMap vertexPrograms = new TIntIntHashMap();
         private final TIntIntMap geometryPrograms = new TIntIntHashMap();
 
         // made package-private after CheckStyle's suggestion
-        public DisposalAction(ResourceUrn urn) {
+        public DisposalAction(ResourceUrn urn, LwjglGraphicsProcessing graphicsProcessing) {
             this.urn = urn;
+            this.graphicsProcessing = graphicsProcessing;
         }
 
         private void disposeData() {
@@ -416,11 +423,14 @@ public class GLSLShader extends Shader {
         }
 
         private void disposePrograms(TIntIntMap programs) {
-            TIntIntIterator it = programs.iterator();
-            while (it.hasNext()) {
-                it.advance();
-                GL20.glDeleteShader(it.value());
-            }
+            final TIntIntMap disposedPrograms = new TIntIntHashMap(programs);
+            graphicsProcessing.asynchToDisplayThread(() -> {
+                TIntIntIterator it = disposedPrograms.iterator();
+                while (it.hasNext()) {
+                    it.advance();
+                    GL20.glDeleteShader(it.value());
+                }
+            });
             programs.clear();
         }
 
